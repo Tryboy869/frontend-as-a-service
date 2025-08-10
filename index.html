@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer-to-Peer API Experiment</title>
+    <meta name="description" content="Une expérience technique sur les APIs décentralisées fonctionnant de pair-à-pair directement dans le navigateur.">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+
+    <style>
+        :root {
+            --background: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --surface: #2a2a2a;
+            --border: #3a3a3a;
+            --success: #22c55e;
+            --error: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        input, textarea, button {
+            font-family: inherit;
+            font-size: 1rem;
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background-color: var(--background);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        
+        button:hover:not(:disabled) {
+            background-color: var(--accent-hover);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .log-container {
+            background-color: #111;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .log-line {
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .log-line.success { color: var(--success); }
+        .log-line.error { color: var(--error); }
+        .log-line.info { color: var(--accent); }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Expérience d'API P2P</h1>
+            <p>Un prototype explorant les APIs décentralisées dans le navigateur.</p>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>1. Connexion au Réseau</h2>
+                <div class="control-group">
+                    <label>Statut : <span id="status">Déconnecté</span></label>
+                    <button id="initBtn" onclick="initPeer()">Initialiser le Pair</button>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>2. Définir un Endpoint d'API</h2>
+                <div class="control-group">
+                    <label for="endpointPath">Chemin de l'Endpoint (ex: /users)</label>
+                    <input type="text" id="endpointPath" placeholder="/users">
+                </div>
+                <div class="control-group">
+                    <label for="endpointLogic">Logique de l'Endpoint (fonction JS)</label>
+                    <textarea id="endpointLogic" placeholder="() => ({ id: 1, name: 'Alice' })"></textarea>
+                </div>
+                <button id="defineBtn" onclick="defineApi()" disabled>Définir l'Endpoint</button>
+            </section>
+
+            <section class="section">
+                <h2>3. Interroger le Réseau</h2>
+                <div class="control-group">
+                    <label for="requestPath">Chemin de l'API à appeler</label>
+                    <input type="text" id="requestPath" placeholder="/users">
+                </div>
+                 <button id="requestBtn" onclick="makeRequest()" disabled>Interroger l'Endpoint</button>
+            </section>
+            
+            <section class="section">
+                <h2>Console d'Événements</h2>
+                <div id="log" class="log-container"></div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 - Un projet expérimental.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+
+    <script>
+        // --- Service P2P - Version Fonctionnelle et Discrète ---
+
+        class PeerService {
+            constructor(logCallback) {
+                this.gun = null;
+                this.log = logCallback;
+                this.endpoints = new Map();
+                this.isInitialized = false;
+            }
+
+            async initialize() {
+                if (this.isInitialized) return;
+                
+                this.log('info', 'Initialisation du pair...');
+                // Utilise des relais publics pour la découverte de pairs (gratuit)
+                this.gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);
+                
+                this.gun.on('hi', peer => {
+                    this.log('success', `Connecté au pair : ${peer.id || 'inconnu'}`);
+                });
+
+                this.gun.on('bye', peer => {
+                    this.log('error', `Pair déconnecté : ${peer.id || 'inconnu'}`);
+                });
+
+                this.isInitialized = true;
+                this.log('success', 'Initialisation terminée. Prêt à communiquer.');
+                
+                // Écouter les requêtes entrantes
+                this.listenForRequests();
+            }
+
+            defineEndpoint(path, handlerFn) {
+                if (!this.isInitialized) throw new Error("Le service n'est pas initialisé.");
+                this.log('info', `Définition locale de l'endpoint : ${path}`);
+                
+                // Stocker la fonction gestionnaire localement
+                this.endpoints.set(path, handlerFn);
+
+                // Annoncer la disponibilité de cet endpoint sur le réseau
+                this.gun.get('endpoints').get(path).put({ available: true, peerId: this.gun._.opt.pid });
+                this.log('success', `Endpoint ${path} annoncé sur le réseau.`);
+            }
+
+            listenForRequests() {
+                this.gun.get('requests').map().on(async (req, reqId) => {
+                    if (!req || !this.endpoints.has(req.path)) {
+                        return;
+                    }
+                    
+                    // Une requête nous est destinée
+                    this.log('info', `Requête reçue pour ${req.path} (ID: ${reqId})`);
+                    
+                    try {
+                        const handler = this.endpoints.get(req.path);
+                        const result = await handler();
+                        
+                        // Répondre sur le canal de réponse
+                        this.gun.get('responses').get(reqId).put({
+                            status: 'success',
+                            data: JSON.stringify(result),
+                            from: this.gun._.opt.pid
+                        });
+                        this.log('success', `Réponse envoyée pour ${req.path}`);
+                    } catch (e) {
+                        this.gun.get('responses').get(reqId).put({
+                            status: 'error',
+                            message: e.message,
+                            from: this.gun._.opt.pid
+                        });
+                        this.log('error', `Erreur en traitant la requête pour ${req.path}: ${e.message}`);
+                    }
+                });
+            }
+
+            async request(path) {
+                if (!this.isInitialized) throw new Error("Le service n'est pas initialisé.");
+
+                return new Promise((resolve, reject) => {
+                    const requestId = Gun.text.random();
+                    let timeout;
+                    
+                    this.log('info', `Envoi de la requête pour ${path} (ID: ${requestId})`);
+
+                    // Écouter la réponse
+                    const responseNode = this.gun.get('responses').get(requestId);
+                    responseNode.on((res, key) => {
+                        if (res) {
+                            // Une fois la réponse reçue, on arrête d'écouter et on nettoie.
+                            responseNode.off();
+                            clearTimeout(timeout);
+                            
+                            if(res.status === 'success'){
+                                this.log('success', `Réponse reçue pour ${path} de ${res.from}`);
+                                resolve(JSON.parse(res.data));
+                            } else {
+                                this.log('error', `Erreur reçue pour ${path}: ${res.message}`);
+                                reject(new Error(res.message));
+                            }
+                        }
+                    });
+
+                    // Envoyer la requête
+                    this.gun.get('requests').get(requestId).put({ path: path, from: this.gun._.opt.pid });
+                    
+                    // Timeout de la requête
+                    timeout = setTimeout(() => {
+                        responseNode.off();
+                        this.log('error', `Timeout: Aucune réponse pour ${path}`);
+                        reject(new Error(`La requête pour ${path} a expiré.`));
+                    }, 10000); // 10 secondes
+                });
+            }
+        }
+
+        // --- Logique de l'interface utilisateur ---
+        
+        const logEl = document.getElementById('log');
+        
+        function writeToLog(type, message) {
+            const line = document.createElement('div');
+            line.className = `log-line ${type}`;
+            const timestamp = new Date().toLocaleTimeString();
+            line.textContent = `[${timestamp}] ${message}`;
+            logEl.appendChild(line);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        const peerService = new PeerService(writeToLog);
+
+        async function initPeer() {
+            const btn = document.getElementById('initBtn');
+            btn.disabled = true;
+            btn.textContent = 'Initialisation...';
+            try {
+                await peerService.initialize();
+                document.getElementById('status').textContent = 'Connecté';
+                document.getElementById('status').style.color = 'var(--success)';
+                btn.textContent = 'Initialisé';
+                
+                // Activer les autres boutons
+                document.getElementById('defineBtn').disabled = false;
+                document.getElementById('requestBtn').disabled = false;
+            } catch (e) {
+                writeToLog('error', `Échec de l'initialisation: ${e.message}`);
+                btn.disabled = false;
+                 btn.textContent = 'Réessayer';
+            }
+        }
+        
+        function defineApi() {
+            const path = document.getElementById('endpointPath').value;
+            const logic = document.getElementById('endpointLogic').value;
+            
+            if (!path || !logic) {
+                writeToLog('error', 'Le chemin et la logique de l'endpoint sont requis.');
+                return;
+            }
+
+            try {
+                // IMPORTANT: Dans un vrai produit, 'eval' est dangereux.
+                // Ici, c'est une manière de rendre la démo interactive.
+                // On encapsule la logique dans une fonction pour l'exécuter plus tard.
+                const handler = new Function(`return ${logic}`)();
+                
+                peerService.defineEndpoint(path, handler);
+                document.getElementById('endpointPath').value = '';
+                document.getElementById('endpointLogic').value = '';
+
+            } catch (e) {
+                writeToLog('error', `Erreur de syntaxe dans la logique JS : ${e.message}`);
+            }
+        }
+
+        async function makeRequest() {
+            const path = document.getElementById('requestPath').value;
+            if (!path) {
+                writeToLog('error', 'Le chemin de la requête est requis.');
+                return;
+            }
+
+            const btn = document.getElementById('requestBtn');
+            btn.disabled = true;
+
+            try {
+                const data = await peerService.request(path);
+                writeToLog('success', `Données reçues pour ${path}: ${JSON.stringify(data, null, 2)}`);
+            } catch (e) {
+                writeToLog('error', `Échec de la requête: ${e.message}`);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+    </script>
+</body>
+</html>
