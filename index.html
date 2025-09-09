@@ -3,880 +3,1177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - Supporter Badges Demo</title>
+    <title>TikTok Badge System - Prototype</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+</head>
+<body>
+    <!-- PAGE 1: CONNEXION -->
+    <div id="login-page" class="page active">
+        <div class="login-container">
+            <div class="logo-section">
+                <div class="tiktok-logo">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M29.4 12.4c-1.4-1-2.3-2.6-2.3-4.4V6h-4.5v18c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2V15c-.4-.1-.9-.1-1.3-.1-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V16.4c1.9 1.4 4.3 2.2 6.8 2.2v-4.5c-1.6 0-3.1-.6-4.4-1.7z" fill="#25F4EE"/>
+                        <path d="M27.1 10.7c1.3 1.1 2.8 1.7 4.4 1.7V8.9c-.9 0-1.8-.3-2.5-.8-.8-.6-1.4-1.4-1.7-2.3h-3.6V24c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2v-3.6c-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V10.7z" fill="#FE2C55"/>
+                    </svg>
+                </div>
+                <h1>Badge System</h1>
+                <p class="subtitle">Affichez votre passion officielle</p>
+            </div>
+            
+            <div class="login-form">
+                <h2>Connexion</h2>
+                <div class="input-group">
+                    <input type="text" id="firstName" placeholder="Prénom" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="lastName" placeholder="Nom" required>
+                </div>
+                <button class="login-btn" onclick="login()">Se connecter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: PROFIL TIKTOK -->
+    <div id="profile-page" class="page">
+        <div class="phone-mockup">
+            <div class="status-bar">
+                <span class="time">18:58</span>
+                <div class="indicators">
+                    <span class="signal">●●●● LTE</span>
+                    <span class="battery">🔋</span>
+                </div>
+            </div>
+            
+            <div class="tiktok-interface">
+                <div class="connection-warning">
+                    <p>Pas de connexion à Internet.<br>Connecte-toi à Internet et réessaie.</p>
+                </div>
+                
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='40' fill='%23ccc'/%3E%3Ctext x='40' y='50' text-anchor='middle' font-size='30' fill='white'%3E👤%3C/text%3E%3C/svg%3E" alt="Avatar">
+                        <div class="plus-icon">+</div>
+                    </div>
+                </div>
+                
+                <div class="username-container">
+                    <span class="username" id="display-username">@supporter</span>
+                    <img class="club-badge" id="profile-badge" src="" alt="Badge Club" style="display: none;">
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat">
+                        <div class="stat-number">2041</div>
+                        <div class="stat-label">Suivis</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">93</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">0</div>
+                        <div class="stat-label">J'aime</div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="edit-profile-btn">Modifier le profil</button>
+                    <button class="settings-btn" onclick="showSettings()">⚙️</button>
+                    <button class="add-friend-btn">👥+</button>
+                </div>
+                
+                <div class="emoji-section">
+                    <span>❤️ 🎂</span>
+                </div>
+                
+                <div class="tab-bar">
+                    <div class="tab active">|||</div>
+                    <div class="tab">🔒</div>
+                    <div class="tab">🔄</div>
+                    <div class="tab">📋</div>
+                    <div class="tab">💭</div>
+                </div>
+                
+                <div class="content-placeholder">
+                    <div class="placeholder-icon">📷</div>
+                    <h3>Partage une photo souvenir</h3>
+                    <button class="upload-btn">Téléverser</button>
+                </div>
+            </div>
+            
+            <div class="bottom-nav">
+                <div class="nav-item">
+                    <span>🏠</span>
+                    <span>Accueil</span>
+                </div>
+                <div class="nav-item">
+                    <span>👥</span>
+                    <span>Amis</span>
+                </div>
+                <div class="nav-item active">
+                    <span class="plus-nav">+</span>
+                </div>
+                <div class="nav-item">
+                    <span class="inbox">📬 <span class="notification">99+</span></span>
+                    <span>Boîte de réce...</span>
+                </div>
+                <div class="nav-item">
+                    <span>👤</span>
+                    <span>Profil</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 3: PARAMÈTRES -->
+    <div id="settings-page" class="page">
+        <div class="phone-mockup">
+            <div class="status-bar">
+                <span class="time">18:59</span>
+                <div class="indicators">
+                    <span class="signal">●●●● LTE</span>
+                    <span class="battery">🔋</span>
+                </div>
+            </div>
+            
+            <div class="settings-interface">
+                <div class="settings-header">
+                    <button class="back-btn" onclick="showProfile()">‹</button>
+                    <h2>Paramètres et confidentialité</h2>
+                </div>
+                
+                <div class="settings-list">
+                    <div class="settings-item">
+                        <span class="icon">🔤</span>
+                        <span class="label">Langues</span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <span class="icon">🌙</span>
+                        <span class="label">Affichage</span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <span class="icon">⏰</span>
+                        <span class="label">Temps d'écran</span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <span class="icon">👨‍👩‍👧‍👦</span>
+                        <span class="label">Connexion Famille</span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <span class="icon">♿</span>
+                        <span class="label">Accessibilité</span>
+                        <span class="notification-dot"></span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <!-- NOUVELLE SECTION BADGE -->
+                    <div class="settings-item badge-section" onclick="showBadgeSelection()">
+                        <span class="icon">🏆</span>
+                        <span class="label">Sélectionner Badge</span>
+                        <span class="badge-preview" id="current-badge-preview"></span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <div class="section-divider">Cache et données mobiles</div>
+                    
+                    <div class="settings-item">
+                        <span class="icon">📱</span>
+                        <span class="label">Vidéos hors ligne</span>
+                        <span class="arrow">›</span>
+                    </div>
+                    
+                    <div class="settings-item">
+                        <span class="icon">🗑️</span>
+                        <span class="label">Libérer de l'espace</span>
+                        <span class="arrow">›</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 4: SÉLECTION BADGE -->
+    <div id="badge-selection-page" class="page">
+        <div class="phone-mockup">
+            <div class="status-bar">
+                <span class="time">18:59</span>
+                <div class="indicators">
+                    <span class="signal">●●●● LTE</span>
+                    <span class="battery">🔋</span>
+                </div>
+            </div>
+            
+            <div class="badge-selection-interface">
+                <div class="settings-header">
+                    <button class="back-btn" onclick="showSettings()">‹</button>
+                    <h2>Sélectionner Badge</h2>
+                </div>
+                
+                <div class="badge-info">
+                    <p>Affichez votre passion pour votre club favori avec un badge officiel à côté de votre nom.</p>
+                </div>
+                
+                <div class="clubs-grid">
+                    <div class="club-option" onclick="selectBadge('real-sociedad')">
+                        <img src="./logos/real-sociedad.png" alt="Real Sociedad" class="club-logo">
+                        <div class="club-info">
+                            <h3>Real Sociedad</h3>
+                            <p class="price">4.99€/mois</p>
+                            <p class="tier">Standard</p>
+                        </div>
+                    </div>
+                    
+                    <div class="club-option" onclick="selectBadge('arsenal')">
+                        <img src="./logos/arsenal.png" alt="Arsenal FC" class="club-logo">
+                        <div class="club-info">
+                            <h3>Arsenal FC</h3>
+                            <p class="price">9.99€/mois</p>
+                            <p class="tier">Premium</p>
+                        </div>
+                    </div>
+                    
+                    <div class="club-option" onclick="selectBadge('barcelona')">
+                        <img src="./logos/barcelona.png" alt="FC Barcelona" class="club-logo">
+                        <div class="club-info">
+                            <h3>FC Barcelona</h3>
+                            <p class="price">19.99€/mois</p>
+                            <p class="tier">Légende</p>
+                        </div>
+                    </div>
+                    
+                    <div class="club-option" onclick="selectBadge('psg')">
+                        <img src="./logos/psg.png" alt="Paris Saint-Germain" class="club-logo">
+                        <div class="club-info">
+                            <h3>Paris SG</h3>
+                            <p class="price">19.99€/mois</p>
+                            <p class="tier">Légende</p>
+                        </div>
+                    </div>
+                    
+                    <div class="club-option" onclick="selectBadge('man-city')">
+                        <img src="./logos/man-city.png" alt="Manchester City" class="club-logo">
+                        <div class="club-info">
+                            <h3>Manchester City</h3>
+                            <p class="price">9.99€/mois</p>
+                            <p class="tier">Premium</p>
+                        </div>
+                    </div>
+                    
+                    <div class="club-option" onclick="selectBadge('juventus')">
+                        <img src="./logos/juventus.png" alt="Juventus FC" class="club-logo">
+                        <div class="club-info">
+                            <h3>Juventus FC</h3>
+                            <p class="price">9.99€/mois</p>
+                            <p class="tier">Premium</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="purchase-section" id="purchase-section" style="display: none;">
+                    <div class="selected-club" id="selected-club-info">
+                        <img id="selected-logo" src="" alt="" class="selected-logo">
+                        <div class="selected-details">
+                            <h3 id="selected-name"></h3>
+                            <p id="selected-price"></p>
+                        </div>
+                    </div>
+                    <button class="purchase-btn" onclick="simulatePurchase()">Activer Badge</button>
+                    <p class="disclaimer">* Prototype - Aucun paiement réel</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>🎉 Badge Activé !</h2>
+            <p>Votre badge <span id="activated-club"></span> est maintenant actif.</p>
+            <button onclick="closeModal()">Voir mon profil</button>
+        </div>
+    </div>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            background-color: #18191a;
-            color: #e4e6ea;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* =====  HEADER FACEBOOK EXACT ===== */
-        .header {
-            background-color: #242526;
-            padding: 12px 16px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #3a3b3c;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-left {
-            display: flex;
+            justify-content: center;
             align-items: center;
         }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: #e4e6ea;
-            font-size: 24px;
-            margin-right: 16px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .header-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #e4e6ea;
-        }
-
-        .search-btn {
-            background: none;
-            border: none;
-            color: #e4e6ea;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        /* ===== LOGIN PAGE ===== */
-        .login-container {
-            max-width: 400px;
-            margin: 80px auto;
-            padding: 20px;
-            background-color: #242526;
-            border-radius: 8px;
-            border: 1px solid #3a3b3c;
-        }
-
-        .login-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #1877f2;
-        }
-
-        .login-subtitle {
-            text-align: center;
-            color: #b0b3b8;
-            margin-bottom: 24px;
-            font-size: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            background-color: #3a3b3c;
-            border: 1px solid #3a3b3c;
-            border-radius: 6px;
-            color: #e4e6ea;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: #1877f2;
-        }
-
-        .form-input::placeholder {
-            color: #8a8d91;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .login-btn:hover {
-            background-color: #166fe5;
-        }
-
-        .demo-info {
-            margin-top: 20px;
-            padding: 12px;
-            background-color: #1f2937;
-            border-radius: 6px;
-            border-left: 4px solid #10b981;
-        }
-
-        .demo-info h4 {
-            color: #10b981;
-            margin-bottom: 8px;
-        }
-
-        .demo-info p {
-            color: #9ca3af;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        /* ===== PROFILE PAGE - EXACT FACEBOOK LAYOUT ===== */
-        .profile-container {
+        
+        .page {
             display: none;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
         }
-
-        .profile-container.active {
+        
+        .page.active {
             display: block;
         }
-
-        .profile-cover {
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        /* LOGIN PAGE */
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .logo-section {
+            margin-bottom: 40px;
+        }
+        
+        .tiktok-logo {
+            margin-bottom: 20px;
+        }
+        
+        .logo-section h1 {
+            color: #333;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .login-form h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #25F4EE;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* PHONE MOCKUP */
+        .phone-mockup {
+            background: #000;
+            border-radius: 25px;
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            background: #000;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .indicators {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        /* TIKTOK INTERFACE */
+        .tiktok-interface {
+            background: #000;
+            color: white;
+            min-height: 600px;
+            padding: 10px 0;
+        }
+        
+        .connection-warning {
+            background: #333;
+            margin: 10px 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+        
+        .profile-header {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .avatar-container {
             position: relative;
         }
-
-        .profile-info {
-            padding: 0 16px;
-            background-color: #242526;
-            position: relative;
-        }
-
-        .profile-avatar {
+        
+        .avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 4px solid #18191a;
-            background-color: #1877f2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+        
+        .plus-icon {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #25F4EE;
             color: white;
-            font-size: 32px;
-            font-weight: 700;
-            margin-top: -40px;
-            margin-bottom: 12px;
-        }
-
-        .profile-name-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .profile-name {
-            font-size: 24px;
-            font-weight: 700;
-            color: #e4e6ea;
-            margin-right: 8px;
-        }
-
-        .verification-badge {
-            font-size: 20px;
-            margin-right: 4px;
-        }
-
-        /* ===== SUPPORTER BADGE - TECHNIQUE CSS AVANCÉE ===== */
-        .supporter-badge {
-            display: inline-block;
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background-color: #DB002C;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #FDB515;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            vertical-align: middle;
-            margin-left: 8px;
-            animation: badge-glow 2s ease-in-out infinite;
-        }
-
-        /* Badge Barcelona - Technique CSS Gemini */
-        .supporter-badge.barcelona::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background-image:
-                repeating-linear-gradient(to right, #FDB515, #FDB515 2px, #DB002C 2px, #DB002C 4px),
-                linear-gradient(#DB002C, #DB002C),
-                linear-gradient(#DB002C, #DB002C);
-            background-size: 50% 100%, 2px 100%, 100% 2px;
-            background-position: right top, center center, center center;
-            background-repeat: no-repeat;
-        }
-
-        .supporter-badge.barcelona::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background-image: repeating-linear-gradient(to right, #004D98 0, #004D98 6px, #A50044 6px, #A50044 12px);
-        }
-
-        .supporter-badge.barcelona .badge-text {
-            position: absolute;
-            top: 50%;
-            left: -5%;
-            width: 110%;
-            transform: translateY(-50%);
-            background-color: #FDB515;
-            color: #000;
-            font-size: 6px;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
-            padding: 1px 0;
-            z-index: 2;
-            letter-spacing: 0.3px;
-        }
-
-        /* Badge Real Madrid */
-        .supporter-badge.real_madrid {
-            background: linear-gradient(45deg, #ffffff 0%, #febe10 100%);
-            border-color: #febe10;
-        }
-
-        .supporter-badge.real_madrid::after {
-            content: '👑';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 12px;
-        }
-
-        /* Badge PSG */
-        .supporter-badge.psg {
-            background: linear-gradient(45deg, #004170 0%, #ff0000 100%);
-            border-color: #004170;
-        }
-
-        .supporter-badge.psg::after {
-            content: '🗼';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 10px;
-        }
-
-        @keyframes badge-glow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-
-        .profile-stats {
-            color: #b0b3b8;
-            margin-bottom: 12px;
-            font-size: 15px;
-        }
-
-        .profile-bio {
-            color: #e4e6ea;
-            margin-bottom: 16px;
-            line-height: 1.4;
-        }
-
-        .profile-buttons {
             display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
         }
-
-        .follow-btn, .message-btn {
-            flex: 1;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
+        
+        .username-container {
+            text-align: center;
+            margin: 15px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
-
-        .follow-btn {
-            background-color: #3a3b3c;
-            color: #e4e6ea;
-            border: none;
+        
+        .username {
+            font-size: 18px;
+            font-weight: 600;
         }
-
-        .message-btn {
-            background-color: #1877f2;
-            color: white;
-            border: none;
+        
+        .club-badge {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #FFD700;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: badgePulse 2s infinite;
         }
-
-        .profile-tabs {
+        
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .stats-container {
             display: flex;
-            border-bottom: 1px solid #3a3b3c;
-            margin-bottom: 16px;
+            justify-content: center;
+            gap: 40px;
+            margin: 25px 0;
         }
-
-        .profile-tab {
-            padding: 12px 16px;
-            color: #b0b3b8;
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #ccc;
+            margin-top: 5px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 20px;
+        }
+        
+        .edit-profile-btn {
+            flex: 1;
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .settings-btn, .add-friend-btn {
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .emoji-section {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        .tab-bar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+        
+        .tab {
+            padding: 8px 0;
             border-bottom: 2px solid transparent;
             cursor: pointer;
         }
-
-        .profile-tab.active {
-            color: #1877f2;
-            border-bottom-color: #1877f2;
+        
+        .tab.active {
+            border-bottom-color: white;
         }
-
-        /* ===== MENU PAGE ===== */
-        .menu-container {
-            display: none;
-            padding: 16px;
+        
+        .content-placeholder {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
         }
-
-        .menu-container.active {
-            display: block;
+        
+        .placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
         }
-
-        .menu-section {
-            background-color: #242526;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            overflow: hidden;
+        
+        .upload-btn {
+            background: #FE2C55;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 15px;
         }
-
-        .menu-item {
+        
+        /* BOTTOM NAVIGATION */
+        .bottom-nav {
             display: flex;
-            align-items: center;
-            padding: 12px 16px;
+            background: #000;
+            padding: 10px 0;
+            border-top: 1px solid #333;
+        }
+        
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
             cursor: pointer;
-            border-bottom: 1px solid #3a3b3c;
         }
-
-        .menu-item:last-child {
-            border-bottom: none;
+        
+        .nav-item.active {
+            color: white;
         }
-
-        .menu-item:hover {
-            background-color: #3a3b3c;
-        }
-
-        .menu-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
-            display: flex;
+        
+        .plus-nav {
+            background: white;
+            color: black;
+            width: 32px;
+            height: 24px;
+            border-radius: 4px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            font-weight: bold;
+        }
+        
+        .inbox {
+            position: relative;
+        }
+        
+        .notification {
+            background: #FE2C55;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        /* SETTINGS INTERFACE */
+        .settings-interface {
+            background: #f8f8f8;
+            min-height: 600px;
+            color: #333;
+        }
+        
+        .settings-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .settings-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .settings-list {
+            background: white;
+            margin-top: 20px;
+        }
+        
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        
+        .settings-item:hover {
+            background: #f8f8f8;
+        }
+        
+        .settings-item .icon {
+            width: 24px;
+            margin-right: 15px;
             font-size: 18px;
         }
-
-        .menu-text {
+        
+        .settings-item .label {
             flex: 1;
+            font-size: 16px;
         }
-
-        .menu-title {
+        
+        .settings-item .arrow {
+            color: #999;
+            font-size: 18px;
+        }
+        
+        .notification-dot {
+            width: 8px;
+            height: 8px;
+            background: #FE2C55;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .section-divider {
+            padding: 15px 20px;
+            font-size: 14px;
+            color: #666;
+            background: #f8f8f8;
             font-weight: 600;
-            color: #e4e6ea;
-            margin-bottom: 2px;
         }
-
-        .menu-subtitle {
-            color: #b0b3b8;
-            font-size: 13px;
+        
+        /* BADGE SECTION HIGHLIGHT */
+        .badge-section {
+            background: linear-gradient(90deg, #fff5f5, #ffffff) !important;
+            border-left: 4px solid #FE2C55;
         }
-
-        /* ===== BADGE SELECTION MODAL ===== */
-        .badge-modal {
+        
+        .badge-preview {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+        
+        /* BADGE SELECTION */
+        .badge-selection-interface {
+            background: #f8f8f8;
+            min-height: 600px;
+        }
+        
+        .badge-info {
+            padding: 20px;
+            background: white;
+            margin: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .clubs-grid {
+            padding: 0 20px;
+        }
+        
+        .club-option {
+            display: flex;
+            align-items: center;
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .club-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .club-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #f0f0f0;
+        }
+        
+        .club-info h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #FE2C55;
+            margin-bottom: 5px;
+        }
+        
+        .tier {
+            font-size: 12px;
+            color: #666;
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .purchase-section {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .selected-club {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .selected-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #FFD700;
+        }
+        
+        .purchase-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .disclaimer {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        /* MODAL */
+        .modal {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
+            background: rgba(0,0,0,0.8);
+            display: flex;
             justify-content: center;
-            z-index: 2000;
-        }
-
-        .badge-modal.active {
-            display: flex;
-        }
-
-        .badge-modal-content {
-            background: #242526;
-            border-radius: 8px;
-            max-width: 400px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .badge-modal-header {
-            padding: 20px;
-            border-bottom: 1px solid #3a3b3c;
-            text-align: center;
-        }
-
-        .badge-modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #e4e6ea;
-        }
-
-        .clubs-grid {
-            padding: 16px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-        }
-
-        .club-option {
-            display: flex;
             align-items: center;
-            padding: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background-color 0.2s;
+            z-index: 1000;
         }
-
-        .club-option:hover {
-            background-color: #3a3b3c;
+        
+        .modal-content {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 300px;
+            margin: 20px;
         }
-
-        .club-option.selected {
-            background-color: #1877f2;
+        
+        .modal-content h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px;
         }
-
-        .club-preview-badge {
-            margin-right: 12px;
+        
+        .modal-content p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
         }
-
-        .club-info {
-            flex: 1;
-        }
-
-        .club-name {
-            font-weight: 600;
-            color: #e4e6ea;
-            margin-bottom: 2px;
-        }
-
-        .club-league {
-            color: #b0b3b8;
-            font-size: 13px;
-        }
-
-        .badge-modal-footer {
-            padding: 16px;
-            border-top: 1px solid #3a3b3c;
-            display: flex;
-            gap: 8px;
-        }
-
-        .cancel-btn, .confirm-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .cancel-btn {
-            background: #3a3b3c;
-            color: #e4e6ea;
-            border: none;
-        }
-
-        .confirm-btn {
-            background: #1877f2;
+        
+        .modal-content button {
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
             color: white;
             border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
         }
-
-        /* ===== UTILITY CLASSES ===== */
-        .hidden {
-            display: none !important;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .phone-mockup {
+                border-radius: 15px;
+                padding: 4px;
+            }
+            
+            .login-container {
+                padding: 30px 20px;
+            }
+            
+            .clubs-grid {
+                padding: 0 10px;
+            }
+            
+            .purchase-section {
+                padding: 15px;
+            }
         }
     </style>
-</head>
-<body>
-    <div id="app"></div>
 
     <script>
-        // ===== CLUBS DATABASE INTÉGRÉ =====
+        // Variables globales
+        let currentUser = null;
+        let selectedBadge = null;
+        
+        // Données des clubs
         const clubs = {
+            'real-sociedad': {
+                name: 'Real Sociedad',
+                price: '4.99€/mois',
+                tier: 'Standard',
+                logo: './logos/real-sociedad.png'
+            },
+            'arsenal': {
+                name: 'Arsenal FC',
+                price: '9.99€/mois',
+                tier: 'Premium',
+                logo: './logos/arsenal.png'
+            },
             'barcelona': {
                 name: 'FC Barcelona',
-                league: 'La Liga - Espagne',
-                colors: ['#a50044', '#004d98']
-            },
-            'real_madrid': {
-                name: 'Real Madrid',
-                league: 'La Liga - Espagne',
-                colors: ['#ffffff', '#febe10']
+                price: '19.99€/mois',
+                tier: 'Légende',
+                logo: './logos/barcelona.png'
             },
             'psg': {
-                name: 'Paris Saint-Germain',
-                league: 'Ligue 1 - France',
-                colors: ['#004170', '#ff0000']
+                name: 'Paris SG',
+                price: '19.99€/mois',
+                tier: 'Légende',
+                logo: './logos/psg.png'
             },
-            'manchester_united': {
-                name: 'Manchester United',
-                league: 'Premier League - Angleterre',
-                colors: ['#da020e', '#ffd700']
+            'man-city': {
+                name: 'Manchester City',
+                price: '9.99€/mois',
+                tier: 'Premium',
+                logo: './logos/man-city.png'
             },
-            'liverpool': {
-                name: 'Liverpool FC',
-                league: 'Premier League - Angleterre',
-                colors: ['#c8102e', '#f6eb61']
+            'juventus': {
+                name: 'Juventus FC',
+                price: '9.99€/mois',
+                tier: 'Premium',
+                logo: './logos/juventus.png'
             }
         };
-
-        // ===== FACEBOOK SIMULATOR ILN =====
-        class FacebookSimulatorILN {
-            constructor() {
-                this.state = {
-                    currentUser: null,
-                    currentPage: 'login',
-                    selectedBadge: null
-                };
+        
+        // Fonctions de navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+        
+        function login() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            
+            if (!firstName || !lastName) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            currentUser = {
+                firstName: firstName,
+                lastName: lastName,
+                badge: localStorage.getItem('userBadge') || null
+            };
+            
+            // Mettre à jour le nom d'utilisateur
+            const username = `@${firstName.toLowerCase()}${lastName.toLowerCase()}`;
+            document.getElementById('display-username').textContent = username;
+            
+            // Afficher le badge s'il existe
+            if (currentUser.badge) {
+                showUserBadge(currentUser.badge);
+            }
+            
+            showPage('profile-page');
+        }
+        
+        function showProfile() {
+            showPage('profile-page');
+        }
+        
+        function showSettings() {
+            // Mettre à jour l'aperçu du badge actuel
+            const currentBadge = localStorage.getItem('userBadge');
+            const preview = document.getElementById('current-badge-preview');
+            
+            if (currentBadge && clubs[currentBadge]) {
+                preview.innerHTML = `<img src="${clubs[currentBadge].logo}" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ddd;">`;
+            } else {
+                preview.innerHTML = '<span style="color: #999; font-size: 12px;">Aucun</span>';
+            }
+            
+            showPage('settings-page');
+        }
+        
+        function showBadgeSelection() {
+            showPage('badge-selection-page');
+        }
+        
+        function selectBadge(clubId) {
+            selectedBadge = clubId;
+            const club = clubs[clubId];
+            
+            // Mettre à jour la section d'achat
+            document.getElementById('selected-logo').src = club.logo;
+            document.getElementById('selected-logo').alt = club.name;
+            document.getElementById('selected-name').textContent = club.name;
+            document.getElementById('selected-price').textContent = club.price;
+            
+            // Afficher la section d'achat
+            document.getElementById('purchase-section').style.display = 'block';
+            
+            // Scroll vers le bas pour voir la section d'achat
+            setTimeout(() => {
+                document.getElementById('purchase-section').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }, 100);
+            
+            // Highlight du club sélectionné
+            document.querySelectorAll('.club-option').forEach(option => {
+                option.style.border = '2px solid transparent';
+            });
+            
+            event.currentTarget.style.border = '2px solid #FE2C55';
+        }
+        
+        function simulatePurchase() {
+            if (!selectedBadge) return;
+            
+            // Simuler un délai de traitement
+            const purchaseBtn = document.querySelector('.purchase-btn');
+            purchaseBtn.textContent = 'Traitement...';
+            purchaseBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Sauvegarder le badge
+                localStorage.setItem('userBadge', selectedBadge);
+                currentUser.badge = selectedBadge;
                 
-                this.init();
-            }
-            
-            init() {
-                this.loadSavedState();
-                this.renderApp();
-                this.bindEvents();
-            }
-            
-            renderApp() {
-                const app = document.getElementById('app');
-                app.innerHTML = this.getAppTemplate();
-            }
-            
-            getAppTemplate() {
-                return `
-                    <!-- LOGIN PAGE -->
-                    <div id="loginPage" class="page ${this.state.currentPage === 'login' ? '' : 'hidden'}">
-                        <div class="header">
-                            <div class="header-left">
-                                <div class="header-title">Facebook</div>
-                            </div>
-                        </div>
-                        
-                        <div class="login-container fade-in">
-                            <div class="login-title">facebook</div>
-                            <div class="login-subtitle">Démo Supporter Badges</div>
-                            
-                            <form id="loginForm">
-                                <div class="form-group">
-                                    <input type="text" class="form-input" id="firstName" 
-                                           placeholder="Prénom" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-input" id="lastName" 
-                                           placeholder="Nom de famille" required>
-                                </div>
-                                <button type="submit" class="login-btn">Se connecter</button>
-                            </form>
-                            
-                            <div class="demo-info">
-                                <h4>💡 Démo Innovation</h4>
-                                <p>Cette démo simule l'intégration de badges supporters officiels sur Facebook. 
-                                Connectez-vous pour découvrir votre profil avec badge personnalisable!</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- PROFILE PAGE -->
-                    <div id="profilePage" class="profile-container ${this.state.currentPage === 'profile' ? 'active' : ''}">
-                        <div class="header">
-                            <div class="header-left">
-                                <button class="back-btn" onclick="app.showMenu()">←</button>
-                                <div class="header-title">${this.state.currentUser?.name || ''}</div>
-                            </div>
-                            <button class="search-btn">🔍</button>
-                        </div>
-                        
-                        <div class="profile-cover"></div>
-                        
-                        <div class="profile-info">
-                            <div class="profile-avatar">
-                                ${this.state.currentUser ? this.state.currentUser.name.charAt(0) : ''}
-                            </div>
-                            
-                            <div class="profile-name-section">
-                                <div class="profile-name">${this.state.currentUser?.name || ''}</div>
-                                <span class="verification-badge">✓</span>
-                                ${this.state.selectedBadge ? this.renderAdvancedBadge(this.state.selectedBadge.key) : ''}
-                            </div>
-                            
-                            <div class="profile-stats">65 K followers • 64 suivi(e)s</div>
-                            
-                            <div class="profile-bio">
-                                ${this.state.selectedBadge ? 
-                                    `Supporter officiel ${this.state.selectedBadge.name} ⚽` : 
-                                    'Passionné de football et des réseaux sociaux 🔵🔴😊'
-                                }
-                            </div>
-                            
-                            <div class="profile-buttons">
-                                <button class="follow-btn">🔔 Suivi(e)</button>
-                                <button class="message-btn">💬 Message</button>
-                            </div>
-                            
-                            <div class="profile-tabs">
-                                <div class="profile-tab active">Publications</div>
-                                <div class="profile-tab">À propos</div>
-                                <div class="profile-tab">Photos</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- MENU PAGE -->
-                    <div id="menuPage" class="menu-container ${this.state.currentPage === 'menu' ? 'active' : ''}">
-                        <div class="header">
-                            <div class="header-left">
-                                <button class="back-btn" onclick="app.showProfile()">←</button>
-                                <div class="header-title">Menu</div>
-                            </div>
-                            <div style="display: flex; gap: 8px;">
-                                <button class="search-btn">↑↓</button>
-                                <button class="search-btn">🔍</button>
-                            </div>
-                        </div>
-                        
-                        <div class="menu-section">
-                            <div class="menu-item">
-                                <div class="menu-icon" style="background: #1877f2; color: white; font-size: 14px; font-weight: bold;">
-                                    ${this.state.currentUser ? this.state.currentUser.name.split(' ').map(n => n.charAt(0)).join('') : 'AD'}
-                                </div>
-                                <div class="menu-text">
-                                    <div class="menu-title">${this.state.currentUser?.name || ''}</div>
-                                    <div class="menu-subtitle">Voir votre profil</div>
-                                </div>
-                                <div style="color: #b0b3b8;">⌄</div>
-                            </div>
-                        </div>
-                        
-                        <div class="menu-section">
-                            <div class="menu-item" onclick="app.showBadgeModal()">
-                                <div class="menu-icon" style="background: #dc2626; color: white;">⚽</div>
-                                <div class="menu-text">
-                                    <div class="menu-title">Badges Supporters</div>
-                                    <div class="menu-subtitle">Choisir votre club préféré</div>
-                                </div>
-                            </div>
-                            <div class="menu-item">
-                                <div class="menu-icon" style="background: #1877f2; color: white;">✓</div>
-                                <div class="menu-text">
-                                    <div class="menu-title">Meta Verified</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- BADGE SELECTION MODAL -->
-                    <div id="badgeModal" class="badge-modal">
-                        <div class="badge-modal-content">
-                            <div class="badge-modal-header">
-                                <div class="badge-modal-title">Choisir votre badge supporter</div>
-                            </div>
-                            <div class="clubs-grid">
-                                ${this.renderClubOptions()}
-                            </div>
-                            <div class="badge-modal-footer">
-                                <button class="cancel-btn" onclick="app.closeBadgeModal()">Annuler</button>
-                                <button class="confirm-btn" onclick="app.confirmBadgeSelection()">Confirmer</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            renderClubOptions() {
-                return Object.entries(clubs).map(([key, club]) => `
-                    <div class="club-option" data-club="${key}" onclick="app.selectClub('${key}')">
-                        <div class="club-preview-badge">
-                            ${this.renderAdvancedBadge(key)}
-                        </div>
-                        <div class="club-info">
-                            <div class="club-name">${club.name}</div>
-                            <div class="club-league">${club.league}</div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-            
-            renderAdvancedBadge(clubKey) {
-                switch(clubKey) {
-                    case 'barcelona':
-                        return `<div class="supporter-badge barcelona"><div class="badge-text">FCB</div></div>`;
-                    case 'real_madrid':
-                        return `<div class="supporter-badge real_madrid"></div>`;
-                    case 'psg':
-                        return `<div class="supporter-badge psg"></div>`;
-                    default:
-                        return `<div class="supporter-badge" style="background: ${clubs[clubKey]?.colors[0] || '#1877f2'}; border-color: ${clubs[clubKey]?.colors[1] || '#fdb515'};">⚽</div>`;
-                }
-            }
-            
-            bindEvents() {
-                const loginForm = document.getElementById('loginForm');
-                if (loginForm) {
-                    loginForm.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.handleLogin();
-                    });
-                }
-            }
-            
-            handleLogin() {
-                const firstName = document.getElementById('firstName').value.trim();
-                const lastName = document.getElementById('lastName').value.trim();
+                // Afficher le modal de succès
+                document.getElementById('activated-club').textContent = clubs[selectedBadge].name;
+                document.getElementById('success-modal').style.display = 'flex';
                 
-                if (firstName && lastName) {
-                    this.state.currentUser = {
-                        id: Date.now(),
-                        name: `${firstName} ${lastName}`
-                    };
-                    this.showProfile();
-                }
-            }
-            
-            showProfile() {
-                this.state.currentPage = 'profile';
-                this.renderApp();
-            }
-            
-            showMenu() {
-                this.state.currentPage = 'menu';
-                this.renderApp();
-            }
-            
-            showBadgeModal() {
-                const modal = document.getElementById('badgeModal');
-                modal.classList.add('active');
-            }
-            
-            closeBadgeModal() {
-                const modal = document.getElementById('badgeModal');
-                modal.classList.remove('active');
+                // Réinitialiser le bouton
+                purchaseBtn.textContent = 'Activer Badge';
+                purchaseBtn.disabled = false;
                 
-                const selected = document.querySelector('.club-option.selected');
-                if (selected) {
-                    selected.classList.remove('selected');
-                }
-            }
+            }, 2000);
+        }
+        
+        function showUserBadge(clubId) {
+            const badgeElement = document.getElementById('profile-badge');
+            const club = clubs[clubId];
             
-            selectClub(clubKey) {
-                const previous = document.querySelector('.club-option.selected');
-                if (previous) {
-                    previous.classList.remove('selected');
-                }
-                
-                const clubElement = document.querySelector(`[data-club="${clubKey}"]`);
-                clubElement.classList.add('selected');
-                
-                this.tempSelectedClub = clubKey;
-            }
-            
-            confirmBadgeSelection() {
-                if (this.tempSelectedClub) {
-                    this.state.selectedBadge = {
-                        key: this.tempSelectedClub,
-                        ...clubs[this.tempSelectedClub]
-                    };
-                    
-                    localStorage.setItem('selectedBadge', JSON.stringify(this.state.selectedBadge));
-                    localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser));
-                    
-                    this.closeBadgeModal();
-                    this.showProfile();
-                }
-            }
-            
-            loadSavedState() {
-                const savedUser = localStorage.getItem('currentUser');
-                const savedBadge = localStorage.getItem('selectedBadge');
-                
-                if (savedUser) {
-                    this.state.currentUser = JSON.parse(savedUser);
-                }
-                
-                if (savedBadge) {
-                    this.state.selectedBadge = JSON.parse(savedBadge);
-                }
-                
-                if (this.state.currentUser) {
-                    this.state.currentPage = 'profile';
-                }
+            if (club) {
+                badgeElement.src = club.logo;
+                badgeElement.alt = `Badge ${club.name}`;
+                badgeElement.title = `Supporter Officiel ${club.name}`;
+                badgeElement.style.display = 'inline-block';
             }
         }
-
-        // ===== INITIALIZATION =====
-        let app;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            app = new FacebookSimulatorILN();
-            window.app = app; // Global access for onclick handlers
+        
+        function closeModal() {
+            document.getElementById('success-modal').style.display = 'none';
             
-            console.log('🚀 Facebook Supporter Badges Demo Ready!');
-        });
-
-        // ===== KEYBOARD SHORTCUTS =====
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'r' || e.key === 'R') {
-                if (confirm('Réinitialiser la démo ?')) {
-                    localStorage.clear();
-                    location.reload();
-                }
+            // Mettre à jour le badge sur le profil
+            showUserBadge(selectedBadge);
+            
+            // Retourner au profil
+            showPage('profile-page');
+            
+            // Réinitialiser la sélection
+            selectedBadge = null;
+            document.getElementById('purchase-section').style.display = 'none';
+            
+            // Créer un effet de célébration
+            setTimeout(() => {
+                const badge = document.getElementById('profile-badge');
+                badge.style.animation = 'badgePulse 1s ease-in-out 3';
+            }, 500);
+        }
+        
+        // Initialisation au chargement
+        window.onload = function() {
+            // Vérifier s'il y a un utilisateur sauvegardé
+            const savedBadge = localStorage.getItem('userBadge');
+            if (savedBadge) {
+                // Pour la démo, on peut pré-remplir les champs
+                document.getElementById('firstName').value = 'Demo';
+                document.getElementById('lastName').value = 'User';
             }
             
+            // Ajouter des événements pour les images qui ne se chargent pas
+            document.querySelectorAll('img[src^="./logos/"]').forEach(img => {
+                img.onerror = function() {
+                    // Remplacer par un placeholder coloré
+                    const canvas = document.createElement('canvas');
+                    canvas.width = 50;
+                    canvas.height = 50;
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Couleur basée sur le nom du club
+                    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'];
+                    const colorIndex = Array.from(img.src).reduce((a, b) => a + b.charCodeAt(0), 0) % colors.length;
+                    
+                    ctx.fillStyle = colors[colorIndex];
+                    ctx.fillRect(0, 0, 50, 50);
+                    
+                    // Ajouter les initiales du club
+                    const clubName = img.alt || 'FC';
+                    const initials = clubName.split(' ').map(word => word[0]).join('').substring(0, 2);
+                    
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(initials, 25, 25);
+                    
+                    img.src = canvas.toDataURL();
+                    img.style.borderRadius = '50%';
+                };
+            });
+        };
+        
+        // Raccourcis clavier pour la démo
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                app?.closeBadgeModal();
+                closeModal();
+            }
+            
+            // Navigation rapide pour la démo
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        showPage('login-page');
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        showPage('profile-page');
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        showPage('settings-page');
+                        break;
+                    case '4':
+                        e.preventDefault();
+                        showPage('badge-selection-page');
+                        break;
+                }
             }
         });
     </script>
