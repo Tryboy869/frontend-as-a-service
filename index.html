@@ -3,367 +3,882 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peer-to-Peer API Experiment</title>
-    <meta name="description" content="Une expérience technique sur les APIs décentralisées fonctionnant de pair-à-pair directement dans le navigateur.">
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-
+    <title>Facebook - Supporter Badges Demo</title>
     <style>
-        :root {
-            --background: #1a1a1a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --surface: #2a2a2a;
-            --surface-light: #333333;
-            --border: #3a3a3a;
-            --success: #22c55e;
-            --error: #ef4444;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--background);
-            color: var(--text-primary);
-            line-height: 1.7;
-            padding: 1rem;
+            background-color: #18191a;
+            color: #e4e6ea;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+        /* =====  HEADER FACEBOOK EXACT ===== */
+        .header {
+            background-color: #242526;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #3a3b3c;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1.5rem;
+        .header-left {
+            display: flex;
+            align-items: center;
         }
 
-        h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem; }
-        header p { color: var(--text-secondary); font-size: 1rem; }
-
-        .tutorial {
-            background-color: var(--surface-light);
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
-        .tutorial h3 { font-size: 1.2rem; color: var(--accent); margin-bottom: 1rem; }
-        .tutorial p { color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .tutorial strong { color: var(--text-primary); font-weight: 600; }
-        .tutorial code { background: var(--background); padding: 2px 6px; border-radius: 4px; font-family: 'SF Mono', 'Consolas', monospace; }
-
-        .section { margin-bottom: 2.5rem; }
-        .section h2 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-        .section > p { margin-bottom: 1rem; color: var(--text-secondary); font-size: 0.9rem; }
-
-        .control-group { margin-bottom: 1rem; position: relative; }
-        label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-secondary); }
-
-        input, textarea, button {
-            font-family: inherit;
-            font-size: 1rem;
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            background-color: var(--background);
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-        }
-
-        input:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
-        textarea { min-height: 120px; resize: vertical; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.9rem; }
-        
-        button { background-color: var(--accent); color: white; border: none; cursor: pointer; font-weight: 600; margin-top: 1rem; }
-        button:hover:not(:disabled) { background-color: var(--accent-hover); }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .example-btn {
+        .back-btn {
             background: none;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            font-size: 0.8rem;
-            padding: 0.25rem 0.5rem;
+            border: none;
+            color: #e4e6ea;
+            font-size: 24px;
+            margin-right: 16px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e4e6ea;
+        }
+
+        .search-btn {
+            background: none;
+            border: none;
+            color: #e4e6ea;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* ===== LOGIN PAGE ===== */
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #242526;
+            border-radius: 8px;
+            border: 1px solid #3a3b3c;
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1877f2;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #b0b3b8;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: #3a3b3c;
+            border: 1px solid #3a3b3c;
+            border-radius: 6px;
+            color: #e4e6ea;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #1877f2;
+        }
+
+        .form-input::placeholder {
+            color: #8a8d91;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: #166fe5;
+        }
+
+        .demo-info {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #1f2937;
+            border-radius: 6px;
+            border-left: 4px solid #10b981;
+        }
+
+        .demo-info h4 {
+            color: #10b981;
+            margin-bottom: 8px;
+        }
+
+        .demo-info p {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* ===== PROFILE PAGE - EXACT FACEBOOK LAYOUT ===== */
+        .profile-container {
+            display: none;
+        }
+
+        .profile-container.active {
+            display: block;
+        }
+
+        .profile-cover {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        .profile-info {
+            padding: 0 16px;
+            background-color: #242526;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 4px solid #18191a;
+            background-color: #1877f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: -40px;
+            margin-bottom: 12px;
+        }
+
+        .profile-name-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e4e6ea;
+            margin-right: 8px;
+        }
+
+        .verification-badge {
+            font-size: 20px;
+            margin-right: 4px;
+        }
+
+        /* ===== SUPPORTER BADGE - TECHNIQUE CSS AVANCÉE ===== */
+        .supporter-badge {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #DB002C;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #FDB515;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            vertical-align: middle;
+            margin-left: 8px;
+            animation: badge-glow 2s ease-in-out infinite;
+        }
+
+        /* Badge Barcelona - Technique CSS Gemini */
+        .supporter-badge.barcelona::before {
+            content: '';
             position: absolute;
             top: 0;
-            right: 0;
-            width: auto;
-            margin: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-image:
+                repeating-linear-gradient(to right, #FDB515, #FDB515 2px, #DB002C 2px, #DB002C 4px),
+                linear-gradient(#DB002C, #DB002C),
+                linear-gradient(#DB002C, #DB002C);
+            background-size: 50% 100%, 2px 100%, 100% 2px;
+            background-position: right top, center center, center center;
+            background-repeat: no-repeat;
         }
-        .example-btn:hover:not(:disabled) { background-color: rgba(59, 130, 246, 0.1); }
 
-        .log-container { background-color: #111; border: 1px solid var(--border); border-radius: 6px; padding: 1rem; height: 300px; overflow-y: auto; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; color: var(--text-secondary); }
-        .log-line { line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
-        .log-line.success { color: var(--success); }
-        .log-line.error { color: var(--error); }
-        .log-line.info { color: var(--accent); }
+        .supporter-badge.barcelona::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background-image: repeating-linear-gradient(to right, #004D98 0, #004D98 6px, #A50044 6px, #A50044 12px);
+        }
 
-        footer { text-align: center; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem; }
+        .supporter-badge.barcelona .badge-text {
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            width: 110%;
+            transform: translateY(-50%);
+            background-color: #FDB515;
+            color: #000;
+            font-size: 6px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+            padding: 1px 0;
+            z-index: 2;
+            letter-spacing: 0.3px;
+        }
+
+        /* Badge Real Madrid */
+        .supporter-badge.real_madrid {
+            background: linear-gradient(45deg, #ffffff 0%, #febe10 100%);
+            border-color: #febe10;
+        }
+
+        .supporter-badge.real_madrid::after {
+            content: '👑';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+
+        /* Badge PSG */
+        .supporter-badge.psg {
+            background: linear-gradient(45deg, #004170 0%, #ff0000 100%);
+            border-color: #004170;
+        }
+
+        .supporter-badge.psg::after {
+            content: '🗼';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+        }
+
+        @keyframes badge-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .profile-stats {
+            color: #b0b3b8;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .profile-bio {
+            color: #e4e6ea;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .profile-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .follow-btn, .message-btn {
+            flex: 1;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .follow-btn {
+            background-color: #3a3b3c;
+            color: #e4e6ea;
+            border: none;
+        }
+
+        .message-btn {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+        }
+
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid #3a3b3c;
+            margin-bottom: 16px;
+        }
+
+        .profile-tab {
+            padding: 12px 16px;
+            color: #b0b3b8;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .profile-tab.active {
+            color: #1877f2;
+            border-bottom-color: #1877f2;
+        }
+
+        /* ===== MENU PAGE ===== */
+        .menu-container {
+            display: none;
+            padding: 16px;
+        }
+
+        .menu-container.active {
+            display: block;
+        }
+
+        .menu-section {
+            background-color: #242526;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #3a3b3c;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item:hover {
+            background-color: #3a3b3c;
+        }
+
+        .menu-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .menu-text {
+            flex: 1;
+        }
+
+        .menu-title {
+            font-weight: 600;
+            color: #e4e6ea;
+            margin-bottom: 2px;
+        }
+
+        .menu-subtitle {
+            color: #b0b3b8;
+            font-size: 13px;
+        }
+
+        /* ===== BADGE SELECTION MODAL ===== */
+        .badge-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .badge-modal.active {
+            display: flex;
+        }
+
+        .badge-modal-content {
+            background: #242526;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .badge-modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #3a3b3c;
+            text-align: center;
+        }
+
+        .badge-modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e4e6ea;
+        }
+
+        .clubs-grid {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .club-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .club-option:hover {
+            background-color: #3a3b3c;
+        }
+
+        .club-option.selected {
+            background-color: #1877f2;
+        }
+
+        .club-preview-badge {
+            margin-right: 12px;
+        }
+
+        .club-info {
+            flex: 1;
+        }
+
+        .club-name {
+            font-weight: 600;
+            color: #e4e6ea;
+            margin-bottom: 2px;
+        }
+
+        .club-league {
+            color: #b0b3b8;
+            font-size: 13px;
+        }
+
+        .badge-modal-footer {
+            padding: 16px;
+            border-top: 1px solid #3a3b3c;
+            display: flex;
+            gap: 8px;
+        }
+
+        .cancel-btn, .confirm-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #3a3b3c;
+            color: #e4e6ea;
+            border: none;
+        }
+
+        .confirm-btn {
+            background: #1877f2;
+            color: white;
+            border: none;
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <header>
-            <h1>Expérience d'API P2P</h1>
-            <p>Un prototype explorant les APIs décentralisées dans le navigateur.</p>
-        </header>
-
-        <main>
-            <div class="tutorial">
-                <h3>💡 Comment Tester</h3>
-                <p>1. **Initialisez le Pair** : Cliquez sur le premier bouton pour vous connecter au réseau P2P.</p>
-                <p>2. **Simulez un autre utilisateur** : <strong>Ouvrez cette même page dans un nouvel onglet</strong> ou une nouvelle fenêtre de navigateur.</p>
-                <p>3. **Définissez et Interrogez** : Définissez une API dans un onglet, et interrogez-la depuis l'autre. Observez la console pour voir la communication directe entre les deux onglets.</p>
-            </div>
-
-            <section class="section">
-                <h2>1. Connexion au Réseau</h2>
-                <p>Chaque visiteur devient un "pair" sur le réseau. L'initialisation est la première étape pour commencer à communiquer.</p>
-                <div class="control-group">
-                    <label>Statut : <span id="status">Déconnecté</span></label>
-                    <button id="initBtn" onclick="initPeer()">Initialiser le Pair</button>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2>2. Définir un Endpoint d'API</h2>
-                <p>Créez un "endpoint" qui sera disponible pour les autres pairs sur le réseau. La logique est une simple fonction Javascript.</p>
-                <div class="control-group">
-                    <label for="endpointPath">Chemin de l'Endpoint (ex: /products)</label>
-                    <button class="example-btn" onclick="loadDefineExample()">Utiliser un exemple</button>
-                    <input type="text" id="endpointPath" placeholder="/users">
-                </div>
-                <div class="control-group">
-                    <label for="endpointLogic">Logique de l'Endpoint (doit retourner un objet)</label>
-                    <textarea id="endpointLogic" placeholder="() => ({ id: 1, name: 'Alice' })"></textarea>
-                </div>
-                <button id="defineBtn" onclick="defineApi()" disabled>Annoncer l'Endpoint sur le Réseau</button>
-            </section>
-
-            <section class="section">
-                <h2>3. Interroger le Réseau</h2>
-                <p>Appelez un endpoint défini par un autre pair. Si vous testez avec deux onglets, appelez ici l'API que vous avez définie dans l'autre onglet.</p>
-                <div class="control-group">
-                    <label for="requestPath">Chemin de l'API à appeler</label>
-                    <button class="example-btn" onclick="loadRequestExample()">Utiliser un exemple</button>
-                    <input type="text" id="requestPath" placeholder="/api/welcome">
-                </div>
-                 <button id="requestBtn" onclick="makeRequest()" disabled>Interroger l'Endpoint</button>
-            </section>
-            
-             <section class="section">
-                <h2>Comment ça fonctionne ?</h2>
-                <p>Ce prototype utilise <strong>Gun.js</strong>, une base de données décentralisée, pour créer un réseau de communication <strong>pair-à-pair (P2P)</strong> via WebRTC. Il n'y a pas de serveur central. Les données et les APIs sont partagées directement entre les navigateurs des utilisateurs connectés. Les données sont éphémères et n'existent que tant qu'au moins un pair est en ligne.</p>
-            </section>
-
-            <section class="section">
-                <h2>Console d'Événements</h2>
-                <div id="log" class="log-container"></div>
-            </section>
-        </main>
-        
-        <footer>
-            <p>&copy; 2025 - Un projet expérimental.</p>
-        </footer>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <div id="app"></div>
 
     <script>
-        class PeerService {
-            // ... (le code de la classe PeerService reste identique à la version précédente)
-            constructor(logCallback) {
-                this.gun = null;
-                this.log = logCallback;
-                this.endpoints = new Map();
-                this.isInitialized = false;
+        // ===== CLUBS DATABASE INTÉGRÉ =====
+        const clubs = {
+            'barcelona': {
+                name: 'FC Barcelona',
+                league: 'La Liga - Espagne',
+                colors: ['#a50044', '#004d98']
+            },
+            'real_madrid': {
+                name: 'Real Madrid',
+                league: 'La Liga - Espagne',
+                colors: ['#ffffff', '#febe10']
+            },
+            'psg': {
+                name: 'Paris Saint-Germain',
+                league: 'Ligue 1 - France',
+                colors: ['#004170', '#ff0000']
+            },
+            'manchester_united': {
+                name: 'Manchester United',
+                league: 'Premier League - Angleterre',
+                colors: ['#da020e', '#ffd700']
+            },
+            'liverpool': {
+                name: 'Liverpool FC',
+                league: 'Premier League - Angleterre',
+                colors: ['#c8102e', '#f6eb61']
             }
+        };
 
-            async initialize() {
-                if (this.isInitialized) return;
+        // ===== FACEBOOK SIMULATOR ILN =====
+        class FacebookSimulatorILN {
+            constructor() {
+                this.state = {
+                    currentUser: null,
+                    currentPage: 'login',
+                    selectedBadge: null
+                };
                 
-                this.log('info', 'Initialisation du pair...');
-                this.gun = Gun(['https://gun-manhattan.herokuapp.com/gun']);
-                
-                this.gun.on('hi', peer => { this.log('success', `Connecté au pair.`); });
-                this.gun.on('bye', peer => { this.log('error', `Pair déconnecté.`); });
-
-                this.isInitialized = true;
-                this.log('success', 'Initialisation terminée. Prêt à communiquer.');
-                
-                this.listenForRequests();
-                
-                // Par défaut, chaque pair définit une API de bienvenue
-                this.defineEndpoint('/api/welcome', () => ({
-                    message: "Bienvenue sur le réseau P2P!",
-                    peerId: this.gun._.opt.pid.substr(0, 12) + '...'
-                }));
+                this.init();
             }
-
-            defineEndpoint(path, handlerFn) {
-                if (!this.isInitialized) throw new Error("Le service n'est pas initialisé.");
-                this.log('info', `Définition locale de l'endpoint : ${path}`);
-                this.endpoints.set(path, handlerFn);
-                this.gun.get('endpoints').get(path).put({ available: true, peerId: this.gun._.opt.pid });
-                this.log('success', `Endpoint ${path} annoncé sur le réseau.`);
-            }
-
-            listenForRequests() {
-                this.gun.get('requests').map().on(async (req, reqId) => {
-                    if (!req || !this.endpoints.has(req.path)) return;
-                    
-                    this.log('info', `Requête reçue pour ${req.path}`);
-                    
-                    try {
-                        const handler = this.endpoints.get(req.path);
-                        const result = await handler();
-                        
-                        this.gun.get('responses').get(reqId).put({
-                            status: 'success',
-                            data: JSON.stringify(result),
-                            from: this.gun._.opt.pid
-                        });
-                        this.log('success', `Réponse envoyée pour ${req.path}`);
-                    } catch (e) {
-                        this.gun.get('responses').get(reqId).put({ status: 'error', message: e.message, from: this.gun._.opt.pid });
-                        this.log('error', `Erreur en traitant ${req.path}: ${e.message}`);
-                    }
-                });
-            }
-
-            async request(path) {
-                if (!this.isInitialized) throw new Error("Le service n'est pas initialisé.");
-
-                return new Promise((resolve, reject) => {
-                    const requestId = Gun.text.random();
-                    let timeout;
-                    
-                    this.log('info', `Envoi de la requête pour ${path}`);
-
-                    const responseNode = this.gun.get('responses').get(requestId);
-                    responseNode.on((res) => {
-                        if (res) {
-                            responseNode.off();
-                            clearTimeout(timeout);
-                            
-                            if(res.status === 'success'){
-                                this.log('success', `Réponse reçue pour ${path}.`);
-                                resolve(JSON.parse(res.data));
-                            } else {
-                                this.log('error', `Erreur reçue pour ${path}: ${res.message}`);
-                                reject(new Error(res.message));
-                            }
-                        }
-                    });
-
-                    this.gun.get('requests').get(requestId).put({ path: path, from: this.gun._.opt.pid });
-                    
-                    timeout = setTimeout(() => {
-                        responseNode.off();
-                        this.log('error', `Timeout: Aucune réponse pour ${path}`);
-                        reject(new Error(`La requête pour ${path} a expiré.`));
-                    }, 10000);
-                });
-            }
-        }
-        
-        // --- Logique de l'interface utilisateur ---
-        
-        const logEl = document.getElementById('log');
-        
-        function writeToLog(type, message) {
-            const line = document.createElement('div');
-            line.className = `log-line ${type}`;
-            const timestamp = new Date().toLocaleTimeString();
-            line.textContent = `[${timestamp}] ${message}`;
-            logEl.appendChild(line);
-            logEl.scrollTop = logEl.scrollHeight;
-        }
-
-        const peerService = new PeerService(writeToLog);
-
-        async function initPeer() {
-            const btn = document.getElementById('initBtn');
-            btn.disabled = true;
-            btn.textContent = 'Initialisation...';
-            try {
-                await peerService.initialize();
-                document.getElementById('status').textContent = 'Connecté';
-                document.getElementById('status').style.color = 'var(--success)';
-                btn.textContent = 'Initialisé';
-                document.getElementById('defineBtn').disabled = false;
-                document.getElementById('requestBtn').disabled = false;
-            } catch (e) {
-                writeToLog('error', `Échec de l'initialisation: ${e.message}`);
-                btn.disabled = false;
-                btn.textContent = 'Réessayer';
-            }
-        }
-        
-        function defineApi() {
-            const path = document.getElementById('endpointPath').value;
-            const logic = document.getElementById('endpointLogic').value;
             
-            if (!path || !logic) {
-                writeToLog('error', 'Le chemin et la logique sont requis.');
-                return;
+            init() {
+                this.loadSavedState();
+                this.renderApp();
+                this.bindEvents();
             }
-
-            try {
-                const handler = new Function(`return ${logic}`)();
-                peerService.defineEndpoint(path, handler);
-            } catch (e) {
-                writeToLog('error', `Erreur de syntaxe dans la logique JS : ${e.message}`);
+            
+            renderApp() {
+                const app = document.getElementById('app');
+                app.innerHTML = this.getAppTemplate();
+            }
+            
+            getAppTemplate() {
+                return `
+                    <!-- LOGIN PAGE -->
+                    <div id="loginPage" class="page ${this.state.currentPage === 'login' ? '' : 'hidden'}">
+                        <div class="header">
+                            <div class="header-left">
+                                <div class="header-title">Facebook</div>
+                            </div>
+                        </div>
+                        
+                        <div class="login-container fade-in">
+                            <div class="login-title">facebook</div>
+                            <div class="login-subtitle">Démo Supporter Badges</div>
+                            
+                            <form id="loginForm">
+                                <div class="form-group">
+                                    <input type="text" class="form-input" id="firstName" 
+                                           placeholder="Prénom" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-input" id="lastName" 
+                                           placeholder="Nom de famille" required>
+                                </div>
+                                <button type="submit" class="login-btn">Se connecter</button>
+                            </form>
+                            
+                            <div class="demo-info">
+                                <h4>💡 Démo Innovation</h4>
+                                <p>Cette démo simule l'intégration de badges supporters officiels sur Facebook. 
+                                Connectez-vous pour découvrir votre profil avec badge personnalisable!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PROFILE PAGE -->
+                    <div id="profilePage" class="profile-container ${this.state.currentPage === 'profile' ? 'active' : ''}">
+                        <div class="header">
+                            <div class="header-left">
+                                <button class="back-btn" onclick="app.showMenu()">←</button>
+                                <div class="header-title">${this.state.currentUser?.name || ''}</div>
+                            </div>
+                            <button class="search-btn">🔍</button>
+                        </div>
+                        
+                        <div class="profile-cover"></div>
+                        
+                        <div class="profile-info">
+                            <div class="profile-avatar">
+                                ${this.state.currentUser ? this.state.currentUser.name.charAt(0) : ''}
+                            </div>
+                            
+                            <div class="profile-name-section">
+                                <div class="profile-name">${this.state.currentUser?.name || ''}</div>
+                                <span class="verification-badge">✓</span>
+                                ${this.state.selectedBadge ? this.renderAdvancedBadge(this.state.selectedBadge.key) : ''}
+                            </div>
+                            
+                            <div class="profile-stats">65 K followers • 64 suivi(e)s</div>
+                            
+                            <div class="profile-bio">
+                                ${this.state.selectedBadge ? 
+                                    `Supporter officiel ${this.state.selectedBadge.name} ⚽` : 
+                                    'Passionné de football et des réseaux sociaux 🔵🔴😊'
+                                }
+                            </div>
+                            
+                            <div class="profile-buttons">
+                                <button class="follow-btn">🔔 Suivi(e)</button>
+                                <button class="message-btn">💬 Message</button>
+                            </div>
+                            
+                            <div class="profile-tabs">
+                                <div class="profile-tab active">Publications</div>
+                                <div class="profile-tab">À propos</div>
+                                <div class="profile-tab">Photos</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- MENU PAGE -->
+                    <div id="menuPage" class="menu-container ${this.state.currentPage === 'menu' ? 'active' : ''}">
+                        <div class="header">
+                            <div class="header-left">
+                                <button class="back-btn" onclick="app.showProfile()">←</button>
+                                <div class="header-title">Menu</div>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="search-btn">↑↓</button>
+                                <button class="search-btn">🔍</button>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-section">
+                            <div class="menu-item">
+                                <div class="menu-icon" style="background: #1877f2; color: white; font-size: 14px; font-weight: bold;">
+                                    ${this.state.currentUser ? this.state.currentUser.name.split(' ').map(n => n.charAt(0)).join('') : 'AD'}
+                                </div>
+                                <div class="menu-text">
+                                    <div class="menu-title">${this.state.currentUser?.name || ''}</div>
+                                    <div class="menu-subtitle">Voir votre profil</div>
+                                </div>
+                                <div style="color: #b0b3b8;">⌄</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-section">
+                            <div class="menu-item" onclick="app.showBadgeModal()">
+                                <div class="menu-icon" style="background: #dc2626; color: white;">⚽</div>
+                                <div class="menu-text">
+                                    <div class="menu-title">Badges Supporters</div>
+                                    <div class="menu-subtitle">Choisir votre club préféré</div>
+                                </div>
+                            </div>
+                            <div class="menu-item">
+                                <div class="menu-icon" style="background: #1877f2; color: white;">✓</div>
+                                <div class="menu-text">
+                                    <div class="menu-title">Meta Verified</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- BADGE SELECTION MODAL -->
+                    <div id="badgeModal" class="badge-modal">
+                        <div class="badge-modal-content">
+                            <div class="badge-modal-header">
+                                <div class="badge-modal-title">Choisir votre badge supporter</div>
+                            </div>
+                            <div class="clubs-grid">
+                                ${this.renderClubOptions()}
+                            </div>
+                            <div class="badge-modal-footer">
+                                <button class="cancel-btn" onclick="app.closeBadgeModal()">Annuler</button>
+                                <button class="confirm-btn" onclick="app.confirmBadgeSelection()">Confirmer</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            renderClubOptions() {
+                return Object.entries(clubs).map(([key, club]) => `
+                    <div class="club-option" data-club="${key}" onclick="app.selectClub('${key}')">
+                        <div class="club-preview-badge">
+                            ${this.renderAdvancedBadge(key)}
+                        </div>
+                        <div class="club-info">
+                            <div class="club-name">${club.name}</div>
+                            <div class="club-league">${club.league}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            renderAdvancedBadge(clubKey) {
+                switch(clubKey) {
+                    case 'barcelona':
+                        return `<div class="supporter-badge barcelona"><div class="badge-text">FCB</div></div>`;
+                    case 'real_madrid':
+                        return `<div class="supporter-badge real_madrid"></div>`;
+                    case 'psg':
+                        return `<div class="supporter-badge psg"></div>`;
+                    default:
+                        return `<div class="supporter-badge" style="background: ${clubs[clubKey]?.colors[0] || '#1877f2'}; border-color: ${clubs[clubKey]?.colors[1] || '#fdb515'};">⚽</div>`;
+                }
+            }
+            
+            bindEvents() {
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleLogin();
+                    });
+                }
+            }
+            
+            handleLogin() {
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                
+                if (firstName && lastName) {
+                    this.state.currentUser = {
+                        id: Date.now(),
+                        name: `${firstName} ${lastName}`
+                    };
+                    this.showProfile();
+                }
+            }
+            
+            showProfile() {
+                this.state.currentPage = 'profile';
+                this.renderApp();
+            }
+            
+            showMenu() {
+                this.state.currentPage = 'menu';
+                this.renderApp();
+            }
+            
+            showBadgeModal() {
+                const modal = document.getElementById('badgeModal');
+                modal.classList.add('active');
+            }
+            
+            closeBadgeModal() {
+                const modal = document.getElementById('badgeModal');
+                modal.classList.remove('active');
+                
+                const selected = document.querySelector('.club-option.selected');
+                if (selected) {
+                    selected.classList.remove('selected');
+                }
+            }
+            
+            selectClub(clubKey) {
+                const previous = document.querySelector('.club-option.selected');
+                if (previous) {
+                    previous.classList.remove('selected');
+                }
+                
+                const clubElement = document.querySelector(`[data-club="${clubKey}"]`);
+                clubElement.classList.add('selected');
+                
+                this.tempSelectedClub = clubKey;
+            }
+            
+            confirmBadgeSelection() {
+                if (this.tempSelectedClub) {
+                    this.state.selectedBadge = {
+                        key: this.tempSelectedClub,
+                        ...clubs[this.tempSelectedClub]
+                    };
+                    
+                    localStorage.setItem('selectedBadge', JSON.stringify(this.state.selectedBadge));
+                    localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser));
+                    
+                    this.closeBadgeModal();
+                    this.showProfile();
+                }
+            }
+            
+            loadSavedState() {
+                const savedUser = localStorage.getItem('currentUser');
+                const savedBadge = localStorage.getItem('selectedBadge');
+                
+                if (savedUser) {
+                    this.state.currentUser = JSON.parse(savedUser);
+                }
+                
+                if (savedBadge) {
+                    this.state.selectedBadge = JSON.parse(savedBadge);
+                }
+                
+                if (this.state.currentUser) {
+                    this.state.currentPage = 'profile';
+                }
             }
         }
 
-        async function makeRequest() {
-            const path = document.getElementById('requestPath').value;
-            if (!path) {
-                writeToLog('error', 'Le chemin de la requête est requis.');
-                return;
+        // ===== INITIALIZATION =====
+        let app;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            app = new FacebookSimulatorILN();
+            window.app = app; // Global access for onclick handlers
+            
+            console.log('🚀 Facebook Supporter Badges Demo Ready!');
+        });
+
+        // ===== KEYBOARD SHORTCUTS =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' || e.key === 'R') {
+                if (confirm('Réinitialiser la démo ?')) {
+                    localStorage.clear();
+                    location.reload();
+                }
             }
-
-            const btn = document.getElementById('requestBtn');
-            btn.disabled = true;
-
-            try {
-                const data = await peerService.request(path);
-                writeToLog('success', `Données reçues pour ${path}: ${JSON.stringify(data, null, 2)}`);
-            } catch (e) {
-                writeToLog('error', `Échec de la requête: ${e.message}`);
-            } finally {
-                btn.disabled = false;
+            
+            if (e.key === 'Escape') {
+                app?.closeBadgeModal();
             }
-        }
-
-        function loadDefineExample() {
-            document.getElementById('endpointPath').value = '/products';
-            document.getElementById('endpointLogic').value = `() => ([
-    { id: 'prod_1', name: 'Clavier Mécanique', price: 99.99 },
-    { id: 'prod_2', name: 'Souris Ergonomique', price: 59.50 }
-])`;
-            writeToLog('info', 'Exemple de définition d\'API chargé.');
-        }
-
-        function loadRequestExample() {
-            document.getElementById('requestPath').value = '/api/welcome';
-            writeToLog('info', 'Exemple de requête chargé. Appelez cette API depuis un autre onglet!');
-        }
-
+        });
     </script>
 </body>
 </html>
