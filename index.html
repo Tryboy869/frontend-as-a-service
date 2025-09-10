@@ -404,16 +404,25 @@
         }
         
         .page.active {
-            display: block;
+            display: flex !important;
         }
 
         /* ================ LOGIN PAGE ================ */
         #login-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+        }
+        
+        #login-page.active {
+            display: flex !important;
+        }
+        
+        #profile-page.active,
+        #settings-page.active,
+        #badge-selection-page.active {
+            display: block !important;
         }
         
         .login-container {
