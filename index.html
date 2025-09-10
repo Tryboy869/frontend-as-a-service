@@ -1189,65 +1189,27 @@
             }
         };
         
-        // Fonctions de navigation avec debug
-        function showPage(pageId) {
-            console.log('Tentative de navigation vers:', pageId);
-            
-            // Masquer toutes les pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-                console.log('Masquage page:', page.id);
-            });
-            
-            // Afficher la page demandée
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                console.log('Page affichée:', pageId);
-            } else {
-                console.error('Page non trouvée:', pageId);
-            }
-        }
-        
         function login() {
-            console.log('Fonction login appelée');
+            alert('Fonction login appelée !'); // Debug
             
+            // Récupérer les valeurs
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
             
-            console.log('Données saisies:', { firstName, lastName });
+            alert(`Données: ${firstName} ${lastName}`); // Debug
             
             if (!firstName || !lastName) {
                 alert('Veuillez remplir tous les champs');
                 return;
             }
             
-            currentUser = {
-                firstName: firstName,
-                lastName: lastName,
-                badge: localStorage.getItem('userBadge') || null
-            };
+            // Navigation simple
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('profile-page').classList.add('active');
             
-            console.log('Utilisateur créé:', currentUser);
-            
-            // Mettre à jour le nom d'utilisateur pour web
-            const username = `@${firstName.toLowerCase()}${lastName.toLowerCase()}`;
-            const usernameElement = document.getElementById('display-username-web');
-            if (usernameElement) {
-                usernameElement.textContent = username;
-                console.log('Username mis à jour:', username);
-            } else {
-                console.warn('Element display-username-web non trouvé');
-            }
-            
-            // Afficher le badge s'il existe
-            if (currentUser.badge) {
-                showUserBadgeWeb(currentUser.badge);
-            }
-            
-            // Transition vers la page profil
-            console.log('Navigation vers profile-page...');
-            showPage('profile-page');
+            alert('Navigation vers profil effectuée !'); // Debug
         }
         
         function showUserBadgeWeb(clubId) {
