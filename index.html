@@ -1,960 +1,265 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-color-mode="dark" data-dark-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok Badge System - Prototype</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+    <title>Pitch: Integrated Developer Badges for GitHub</title>
+    
     <style>
-        /* --- Styles Généraux --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ==========================================================================
+           1. RESET & FONDAMENTAUX DE STYLE GITHUB
+           ========================================================================== */
+        :root {
+            --color-canvas-default: #0d1117;
+            --color-canvas-subtle: #161b22;
+            --color-fg-default: #c9d1d9;
+            --color-fg-muted: #8b949e;
+            --color-border-default: #30363d;
+            --color-border-muted: #21262d;
+            --color-accent-fg: #58a6ff;
+            --color-success-fg: #3fb950;
+            --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            
+            /* Couleurs de rareté */
+            --rarity-common: #388bfd;
+            --rarity-rare: #a371f7;
+            --rarity-legendary: #d2a83c;
+
+            /* Couleurs des badges */
+            --badge-js-bg: #f1e05a; --badge-js-text: #0d1117;
+            --badge-python-bg: #3572A5; --badge-python-text: #ffde57;
+            --badge-react-bg: #61DAFB; --badge-react-text: #0d1117;
+            --badge-microsoft-bg: #0078D4; --badge-microsoft-text: #ffffff;
+            --badge-google-gradient: linear-gradient(90deg, #4285F4, #DB4437, #F4B400, #0F9D58); --badge-google-text: #ffffff;
+            --badge-github-bg: #24292e; --badge-github-text: #ffffff;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #000;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .page {
-            display: none;
-            flex-direction: column;
-            min-height: 100vh;
-            width: 100%;
-        }
-        
-        .page.active {
-            display: flex !important;
+            font-family: var(--font-family-sans-serif);
+            background-color: var(--color-canvas-default);
+            color: var(--color-fg-default);
+            margin: 0;
+            font-size: 14px;
         }
 
-        /* --- PAGE 1: CONNEXION --- */
-        #login-page {
-            background: linear-gradient(135deg, #1f2229 0%, #000000 100%);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+        /* ==========================================================================
+           2. MISE EN PAGE DE L'INTERFACE GITHUB
+           ========================================================================== */
+        .page-container { max-width: 1012px; margin: 24px auto; padding: 0 24px; }
+        .repo-header { margin-bottom: 24px; }
+        .repo-header h1 { font-size: 20px; font-weight: 400; color: var(--color-fg-muted); }
+        .repo-header a { color: var(--color-accent-fg); text-decoration: none; font-weight: 600; }
+        .repo-header a:hover { text-decoration: underline; }
         
-        .login-container {
-            background: rgba(30, 30, 30, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            max-width: 450px;
-            width: 100%;
-        }
-        
-        .logo-section {
-            margin-bottom: 50px;
-        }
-        
-        .tiktok-logo {
-            margin-bottom: 25px;
-        }
-        
-        .logo-section h1 {
-            color: #fff;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            color: #aaa;
-            font-size: 18px;
-        }
-        
-        .login-form h2 {
-            color: #fff;
-            font-size: 28px;
-            margin-bottom: 40px;
-        }
-        
-        .input-group {
-            margin-bottom: 25px;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 18px;
-            background-color: #222;
-            border: 2px solid #444;
-            color: #fff;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        .input-group input::placeholder {
-            color: #888;
+        .pr-list-container {
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
         }
 
-        .input-group input:focus {
-            border-color: #25F4EE;
-            box-shadow: 0 0 0 3px rgba(37, 244, 238, 0.2);
+        .pr-list-header {
+            background-color: var(--color-canvas-subtle);
+            padding: 16px;
+            border-bottom: 1px solid var(--color-border-default);
+            border-radius: 6px 6px 0 0;
         }
         
-        .login-btn {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(45deg, #FE2C55, #25F4EE);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
+        .pr-list { list-style: none; padding: 0; margin: 0; }
+        .pr-item { display: flex; align-items: flex-start; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--color-border-muted); }
+        .pr-item:last-child { border-bottom: none; }
+        
+        .pr-icon { color: var(--color-success-fg); margin-top: 4px; }
+        .pr-info { flex-grow: 1; }
+        .pr-title { font-size: 16px; font-weight: 600; color: var(--color-fg-default); text-decoration: none; }
+        .pr-title:hover { color: var(--color-accent-fg); }
+
+        .pr-meta { font-size: 12px; color: var(--color-fg-muted); margin-top: 4px; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .pr-meta .username { font-weight: 600; color: var(--color-fg-muted); }
+        .pr-meta .username:hover { color: var(--color-accent-fg); cursor: pointer; }
+        .badges-container { display: inline-flex; gap: 4px; vertical-align: middle; margin-left: 4px; }
+
+        /* ==========================================================================
+           3. STYLE DES BADGES & TOOLTIPS
+           ========================================================================== */
+        .badge {
+            position: relative; /* Pour le positionnement du tooltip */
+            display: inline-block;
+            padding: 1px 7px;
+            font-size: 11px;
             font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* --- En-tête Commun --- */
-        .tiktok-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: #000;
-            border-bottom: 1px solid #222;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .header-left h1 {
-            font-size: 22px;
-        }
-        
-        .header-right {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .header-btn, .back-btn {
-            background: #222;
-            color: #fff;
-            border: none;
-            height: 40px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background 0.2s;
-            padding: 0 15px;
-        }
-        
-        .header-btn {
-            width: 40px;
-        }
-        
-        .header-btn:hover, .back-btn:hover {
-            background: #333;
-        }
-
-        /* --- Contenu Principal & Sidebar --- */
-        .main-content {
-            display: flex;
-            flex: 1;
-        }
-        
-        .sidebar {
-            width: 280px;
-            background: #000;
-            padding: 30px 20px;
-            border-right: 1px solid #222;
-            overflow-y: auto;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 12px 15px;
-            border-radius: 8px;
-            color: #ccc;
+            line-height: 16px;
+            border-radius: 16px;
+            border: 1.5px solid transparent;
             text-decoration: none;
-            transition: all 0.2s;
-            margin-bottom: 5px;
-        }
-        
-        .nav-item:hover { background: #222; color: #fff; }
-        .nav-item.active { background: #FE2C55; color: #fff; }
-
-        /* --- PAGE PROFIL --- */
-        .profile-content {
-            flex: 1;
-            padding: 40px;
-            max-width: 900px;
-            margin: 0 auto;
+            transition: all 0.2s ease-in-out;
+            user-select: none;
         }
 
-        .connection-warning {
-            background: rgba(254, 44, 85, 0.1);
-            color: #FE2C55;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            text-align: center;
-            border: 1px solid #FE2C55;
+        .badge:hover { transform: scale(1.1); }
+        .badge.javascript { background-color: var(--badge-js-bg); color: var(--badge-js-text); }
+        .badge.python     { background-color: var(--badge-python-bg); color: var(--badge-python-text); }
+        .badge.react      { background-color: var(--badge-react-bg); color: var(--badge-react-text); }
+        .badge.microsoft  { background-color: var(--badge-microsoft-bg); color: var(--badge-microsoft-text); }
+        .badge.google     { background-image: var(--badge-google-gradient); color: var(--badge-google-text); }
+        .badge.github     { background-color: var(--badge-github-bg); color: var(--badge-github-text); border: 1px solid #666; }
+
+        .badge.common     { border-color: var(--rarity-common); }
+        .badge.rare       { border-color: var(--rarity-rare); }
+        .badge.legendary  { 
+            border-color: var(--rarity-legendary);
+            box-shadow: 0 0 5px var(--rarity-legendary);
+            animation: glow 1.5s infinite alternate ease-in-out;
         }
 
-        .profile-info {
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-        }
-        
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-        }
-        
-        .username-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .username {
-            font-size: 28px;
-        }
-        
-        .club-badge {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #FFD700;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            animation: badgePulse 2s infinite ease-in-out;
-        }
-        
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); }
-            50% { transform: scale(1.1); box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6); }
-        }
-        
-        .stats-container {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 25px;
-        }
-        
-        .stat-number { font-size: 20px; font-weight: 700; }
-        .stat-label { font-size: 14px; color: #aaa; }
-        
-        .edit-profile-btn {
-            background: #222; color: white; border: 1px solid #444;
-            padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;
+        @keyframes glow {
+            from { box-shadow: 0 0 4px -1px var(--rarity-legendary); }
+            to   { box-shadow: 0 0 8px 1px var(--rarity-legendary); }
         }
 
-        .content-tabs {
-            display: flex; border-bottom: 1px solid #222; margin-top: 40px;
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #21262d;
+            color: var(--color-fg-default);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, visibility 0.2s;
+            border: 1px solid var(--color-border-default);
         }
-        .tab {
-            padding: 15px 25px; cursor: pointer; font-weight: 600; color: #888;
-            border-bottom: 2px solid transparent;
+        .tooltip-rarity { font-weight: 600; }
+        .tooltip-date { font-size: 11px; color: var(--color-fg-muted); margin-top: 2px; }
+        
+        .badge:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
         }
-        .tab.active { color: #fff; border-bottom-color: #fff; }
+        
+        .common .tooltip-rarity { color: var(--rarity-common); }
+        .rare .tooltip-rarity { color: var(--rarity-rare); }
+        .legendary .tooltip-rarity { color: var(--rarity-legendary); }
 
-        .content-placeholder {
-            text-align: center;
-            padding: 80px 40px;
-            color: #666;
+        /* ==========================================================================
+           4. SECTION PITCH
+           ========================================================================== */
+        .pitch-section {
+            margin-top: 40px;
+            padding: 24px;
+            background-color: var(--color-canvas-subtle);
+            border: 1px solid var(--color-border-default);
+            border-radius: 6px;
         }
-        
-        .placeholder-icon {
-            font-size: 64px;
-            margin-bottom: 25px;
-        }
-        
-        .content-placeholder h3 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-        
-        .content-placeholder p {
-            font-size: 16px;
-            margin-bottom: 30px;
-        }
-        
-        .upload-btn {
-            background: linear-gradient(45deg, #FE2C55, #25F4EE);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .upload-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* --- PAGE PARAMÈTRES --- */
-        .settings-container {
-            padding: 40px; max-width: 1200px; margin: 0 auto;
-        }
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .settings-section-title {
-            font-size: 18px; margin-bottom: 20px; color: #aaa;
-        }
-        .settings-item {
-            display: flex; align-items: center; gap: 20px;
-            background: #111; padding: 20px; border-radius: 12px;
-            transition: background 0.2s; cursor: pointer;
-        }
-        .settings-item:hover { background: #222; }
-        .settings-item .icon { font-size: 20px; }
-        .settings-item .label { font-weight: 600; }
-        .settings-item .description { color: #888; font-size: 14px; }
-        .settings-item .arrow { margin-left: auto; color: #555; font-size: 20px; }
-        .badge-preview-container { margin-top: 8px; }
-
-        /* --- PAGE SÉLECTION BADGE --- */
-        .badge-selection-container {
-            padding: 40px; max-width: 1000px; margin: 0 auto;
-        }
-        .intro-card {
-            background: linear-gradient(135deg, #FE2C55, #4a34b3);
-            padding: 30px; border-radius: 20px; margin-bottom: 40px;
-        }
-        .intro-card h2 { font-size: 28px; }
-        .benefits-list { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
-        .benefit { background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px; font-size: 14px; }
-        
-        .clubs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        .club-option {
-            background: #111; border-radius: 15px; padding: 20px;
-            display: flex; align-items: center; gap: 20px;
-            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #333;
-        }
-        .club-option:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .club-logo { width: 60px; height: 60px; object-fit: contain; }
-        .club-info h4 { font-size: 18px; }
-        .club-info .price { font-size: 16px; font-weight: bold; color: #25F4EE; }
-        .price span { font-size: 12px; color: #aaa; }
-        .tier {
-            margin-top: 5px; padding: 3px 10px; border-radius: 15px; font-size: 12px;
-            font-weight: bold; text-align: center;
-        }
-        .tier.standard { background: #3498db; color: white; }
-        .tier.premium { background: #9b59b6; color: white; }
-        .tier.legend { background: linear-gradient(45deg, #f1c40f, #e67e22); color: white; }
-
-        /* --- PANNEAU D'ACHAT --- */
-        .purchase-panel {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(15px);
-            border-top: 1px solid #333;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: slideUp 0.5s ease-out;
-        }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        
-        .purchase-content { display: flex; align-items: center; gap: 30px; width: 100%; max-width: 800px; }
-        .selected-logo { width: 60px; height: 60px; }
-        .selected-details h4 { font-size: 20px; }
-        .selected-details p { color: #25F4EE; font-weight: bold; }
-        .features span { font-size: 12px; color: #aaa; margin-right: 15px; }
-        .purchase-btn {
-            margin-left: auto; background: #25F4EE; color: #000;
-            border: none; border-radius: 12px; padding: 15px 30px;
-            font-size: 18px; font-weight: bold; cursor: pointer; display: flex;
-            align-items: center; gap: 10px; transition: transform 0.2s;
-        }
-        .purchase-btn:hover { transform: scale(1.05); }
-        .disclaimer { font-size: 12px; color: #666; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); }
-
-        /* --- MODALE DE SUCCÈS --- */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); display: flex;
-            justify-content: center; align-items: center; z-index: 200;
-        }
-        .modal-overlay { position: absolute; width: 100%; height: 100%; }
-        .modal-content {
-            background: #222; padding: 40px; border-radius: 20px; text-align: center;
-            width: 90%; max-width: 450px; z-index: 201;
-            animation: fadeIn 0.3s ease-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        
-        .success-animation { font-size: 60px; margin-bottom: 20px; }
-        .modal-content h2 { margin-bottom: 15px; }
-        .modal-content p { color: #ccc; margin-bottom: 30px; }
-        .modal-actions { display: flex; gap: 15px; }
-        .modal-actions button { flex: 1; padding: 15px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; }
-        .primary-btn { background: #FE2C55; color: white; }
-
-        /* --- Responsive --- */
-        @media (max-width: 900px) {
-            .main-content {
-                flex-direction: column;
-            }
-            .sidebar { 
-                display: none; 
-            }
-            .profile-content {
-                padding: 20px;
-            }
-            .profile-info { 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center; 
-            }
-            .stats-container { 
-                justify-content: center; 
-            }
-            .action-buttons { 
-                justify-content: center; 
-            }
-            .purchase-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .purchase-btn {
-                margin-left: 0;
-                margin-top: 15px;
-            }
-        }
+        .pitch-section h2 { margin-top: 0; border-bottom: 1px solid var(--color-border-default); padding-bottom: 8px; font-size: 18px; }
+        .pitch-section p { color: var(--color-fg-muted); }
+        .pitch-section ul { padding-left: 20px; color: var(--color-fg-default); }
     </style>
 </head>
 <body>
-    <div id="login-page" class="page active">
-        <div class="login-container">
-            <div class="logo-section">
-                <div class="tiktok-logo">
-                    <svg width="50" height="50" viewBox="0 0 40 40" fill="none">
-                        <path d="M29.4 12.4c-1.4-1-2.3-2.6-2.3-4.4V6h-4.5v18c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2V15c-.4-.1-.9-.1-1.3-.1-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V16.4c1.9 1.4 4.3 2.2 6.8 2.2v-4.5c-1.6 0-3.1-.6-4.4-1.7z" fill="#25F4EE"/>
-                        <path d="M27.1 10.7c1.3 1.1 2.8 1.7 4.4 1.7V8.9c-.9 0-1.8-.3-2.5-.8-.8-.6-1.4-1.4-1.7-2.3h-3.6V24c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2v-3.6c-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V10.7z" fill="#FE2C55"/>
-                    </svg>
-                </div>
-                <h1 data-translate="badgeSystem">Badge System</h1>
-                <p class="subtitle" data-translate="showPassion">Affichez votre passion officielle</p>
-            </div>
-            
-            <div class="login-form">
-                <h2 data-translate="login">Connexion</h2>
-                <div class="input-group">
-                    <input type="text" id="firstName" data-translate-placeholder="firstNamePlaceholder" placeholder="Prénom" required>
-                </div>
-                <div class="input-group">
-                    <input type="text" id="lastName" data-translate-placeholder="lastNamePlaceholder" placeholder="Nom" required>
-                </div>
-                <button class="login-btn" onclick="login()" data-translate="connect">Se connecter</button>
-            </div>
+
+    <div class="page-container">
+        <!-- En-tête de la page de simulation -->
+        <div class="repo-header">
+            <h1>
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-repo">
+                    <path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25a.25.25 0 01.25-.25h3.5a.25.25 0 01.25.25v3.25a.25.25 0 01-.4.2l-1.45-1.087a.25.25 0 00-.3 0L5.4 15.7a.25.25 0 01-.4-.2v-3.25z"></path>
+                </svg>
+                <a href="#">microsoft</a> / <a href="#">vscode</a>
+            </h1>
         </div>
-    </div>
 
-    <div id="profile-page" class="page">
-        <header class="tiktok-header">
-            <div class="header-left">
-                <div class="tiktok-logo-small">
-                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
-                        <path d="M29.4 12.4c-1.4-1-2.3-2.6-2.3-4.4V6h-4.5v18c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2V15c-.4-.1-.9-.1-1.3-.1-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V16.4c1.9 1.4 4.3 2.2 6.8 2.2v-4.5c-1.6 0-3.1-.6-4.4-1.7z" fill="#25F4EE"/>
-                        <path d="M27.1 10.7c1.3 1.1 2.8 1.7 4.4 1.7V8.9c-.9 0-1.8-.3-2.5-.8-.8-.6-1.4-1.4-1.7-2.3h-3.6V24c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2v-3.6c-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V10.7z" fill="#FE2C55"/>
-                    </svg>
-                </div>
-                <h1>TikTok</h1>
+        <!-- Conteneur de la liste des Pull Requests -->
+        <div class="pr-list-container">
+            <div class="pr-list-header">
+                <strong>Concept: Integrated Developer Badges</strong>
             </div>
-            <div class="header-right">
-                <button class="header-btn">🔍</button>
-                <button class="header-btn" onclick="showSettings()">⚙️</button>
-            </div>
-        </header>
-
-        <div class="main-content">
-            <nav class="sidebar">
-                <div class="nav-section">
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">🏠</span>
-                        <span class="nav-label" data-translate="forYou">Pour vous</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">👥</span>
-                        <span class="nav-label" data-translate="following">Abonnements</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <span class="nav-icon">🔥</span>
-                        <span class="nav-label" data-translate="trends">Tendances</span>
-                    </a>
-                    <a href="#" class="nav-item active">
-                        <span class="nav-icon">👤</span>
-                        <span class="nav-label" data-translate="profile">Profil</span>
-                    </a>
-                </div>
-            </nav>
-
-            <main class="profile-content">
-                <div class="connection-warning">
-                    <p data-translate="demoMode">⚠️ Mode démonstration - Fonctionnalités limitées</p>
-                </div>
-
-                <div class="profile-header">
-                    <div class="profile-info">
-                        <div class="avatar-container">
-                            <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='60' fill='%236366f1'/%3E%3Ctext x='60' y='75' text-anchor='middle' font-size='50' fill='white'%3E👤%3C/text%3E%3C/svg%3E" alt="Avatar">
-                        </div>
-                        
-                        <div class="profile-details">
-                            <div class="username-container">
-                                <h2 class="username" id="display-username">@supporter</h2>
-                                <img class="club-badge" id="profile-badge" src="" alt="Badge Club" style="display: none;">
-                            </div>
-                            
-                            <div class="stats-container">
-                                <div class="stat">
-                                    <div class="stat-number">2,041</div>
-                                    <div class="stat-label" data-translate="followingStat">Suivis</div>
-                                </div>
-                                <div class="stat">
-                                    <div class="stat-number">93</div>
-                                    <div class="stat-label" data-translate="followersStat">Followers</div>
-                                </div>
-                                <div class="stat">
-                                    <div class="stat-number">0</div>
-                                    <div class="stat-label" data-translate="likesStat">J'aime</div>
-                                </div>
-                            </div>
-                            
-                            <div class="action-buttons">
-                                <button class="edit-profile-btn" data-translate="editProfile">Modifier le profil</button>
-                            </div>
-                            
-                            <div class="bio-section">
-                                <p class="bio" data-translate="bioText">❤️ Passionné de football • 🎂 Supporter depuis toujours</p>
-                            </div>
-                        </div>
+            <ul class="pr-list">
+                <!-- PR 1 -->
+                <li class="pr-item">
+                    <div class="pr-icon">
+                        <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-git-pull-request">
+                            <path fill-rule="evenodd" fill="currentColor" d="M14.5 3.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm-5 0a1 1 0 102 0 1 1 0 00-2 0zM16 8.25a.75.75 0 01-.75.75H13V10a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2h2.5a.75.75 0 010 1.5H4a.5.5 0 00-.5.5v6a.5.5 0 00.5.5h7a.5.5 0 00.5-.5V9h-2.25a.75.75 0 010-1.5H15.25a.75.75 0 01.75.75zM4.5 3.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm-5 0a1 1 0 102 0 1 1 0 00-2 0z"></path>
+                        </svg>
                     </div>
-                </div>
-                
-                <div class="content-tabs">
-                    <div class="tab active" data-translate="videos">Vidéos</div>
-                    <div class="tab" data-translate="likes">J'aime</div>
-                </div>
-                
-                <div class="content-grid">
-                    <div class="content-placeholder">
-                        <div class="placeholder-icon">📷</div>
-                        <h3 data-translate="shareFirstVideo">Partage ta première vidéo</h3>
-                        <p data-translate="videosAppearHere">Tes vidéos apparaîtront ici</p>
-                        <button class="upload-btn" data-translate="createVideo">+ Créer une vidéo</button>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <div id="settings-page" class="page">
-        <header class="tiktok-header">
-            <div class="header-left">
-                <button class="back-btn" onclick="showProfile()" data-translate="back">← Retour</button>
-                <h1 data-translate="settings">Paramètres</h1>
-            </div>
-        </header>
-
-        <div class="main-content">
-            <div class="settings-container">
-                <div class="settings-grid">
-                    <div class="settings-column">
-                        <h3 class="settings-section-title" data-translate="customization">Personnalisation</h3>
-                        <div class="settings-list">
-                            <div class="settings-item badge-section" onclick="showBadgeSelection()">
-                                <span class="icon">🏆</span>
-                                <div class="setting-info">
-                                    <span class="label" data-translate="supporterBadge">Badge Supporter</span>
-                                    <span class="description" data-translate="showPassion">Affichez votre passion</span>
-                                    <div class="badge-preview-container">
-                                        <span class="badge-preview" id="current-badge-preview"></span>
+                    <div class="pr-info">
+                        <a href="#" class="pr-title">Feature: Add inline AI code suggestions</a>
+                        <div class="pr-meta">
+                            #1240 opened 2 hours ago by <strong class="username">AliceDupont</strong>
+                            <div class="badges-container">
+                                <span class="badge javascript legendary">JS
+                                    <div class="tooltip">
+                                        JavaScript Expert
+                                        <div class="tooltip-rarity legendary">Légendaire</div>
+                                        <div class="tooltip-date">Obtenu: 12/06/2024</div>
                                     </div>
-                                </div>
-                                <span class="arrow">›</span>
+                                </span>
+                                <span class="badge react rare">React
+                                    <div class="tooltip">
+                                        React Certified Developer
+                                        <div class="tooltip-rarity rare">Rare</div>
+                                        <div class="tooltip-date">Obtenu: 03/02/2024</div>
+                                    </div>
+                                </span>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </li>
+                <!-- PR 2 -->
+                <li class="pr-item">
+                    <div class="pr-icon">
+                       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" class="octicon octicon-git-pull-request">
+                            <path fill-rule="evenodd" fill="currentColor" d="M14.5 3.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm-5 0a1 1 0 102 0 1 1 0 00-2 0zM16 8.25a.75.75 0 01-.75.75H13V10a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2h2.5a.75.75 0 010 1.5H4a.5.5 0 00-.5.5v6a.5.5 0 00.5.5h7a.5.5 0 00.5-.5V9h-2.25a.75.75 0 010-1.5H15.25a.75.75 0 01.75.75zM4.5 3.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zm-5 0a1 1 0 102 0 1 1 0 00-2 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="pr-info">
+                        <a href="#" class="pr-title">Fix: Performance regression in dependency resolver</a>
+                        <div class="pr-meta">
+                            #1239 opened 5 hours ago by <strong class="username">BobMartin</strong>
+                             <div class="badges-container">
+                                <span class="badge python rare">Python
+                                    <div class="tooltip">
+                                        Python Core Contributor
+                                        <div class="tooltip-rarity rare">Rare</div>
+                                        <div class="tooltip-date">Obtenu: 09/11/2023</div>
+                                    </div>
+                                </span>
+                                <span class="badge google common">Google
+                                     <div class="tooltip">
+                                        Google Cloud Certified
+                                        <div class="tooltip-rarity common">Commun</div>
+                                        <div class="tooltip-date">Obtenu: 25/07/2024</div>
+                                    </div>
+                                </span>
+                                <span class="badge github legendary">GitHub
+                                     <div class="tooltip">
+                                        GitHub Star
+                                        <div class="tooltip-rarity legendary">Légendaire</div>
+                                        <div class="tooltip-date">Obtenu: 01/01/2023</div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section expliquant le pitch -->
+        <div class="pitch-section">
+            <h2>Proposition de Valeur</h2>
+            <p>Ce prototype démontre comment un système de badges de compétences peut s'intégrer de manière transparente dans l'interface de GitHub pour enrichir l'écosystème.</p>
+            <ul>
+                <li><strong>Validation instantanée :</strong> Reconnaître immédiatement l'expertise d'un contributeur.</li>
+                <li><strong>Gamification et engagement :</strong> Motiver les développeurs à obtenir des certifications et à contribuer à des projets pour gagner de nouveaux badges.</li>
+                <li><strong>Aide au recrutement :</strong> Permettre aux recruteurs d'identifier plus facilement les talents qualifiés directement sur la plateforme.</li>
+                <li><strong>Écosystème unifié :</strong> Créer des ponts entre les certifications (Microsoft, Google) et les contributions open-source (GitHub), renforçant la valeur de chaque plateforme.</li>
+            </ul>
         </div>
     </div>
-
-    <div id="badge-selection-page" class="page">
-        <header class="tiktok-header">
-            <div class="header-left">
-                <button class="back-btn" onclick="showSettings()" data-translate="back">← Retour</button>
-                <h1 data-translate="selectBadgeTitle">Badge Supporter</h1>
-            </div>
-        </header>
-
-        <div class="main-content">
-            <div class="badge-selection-container">
-                <div class="badge-intro">
-                    <div class="intro-card">
-                        <h2 data-translate="officialBadgeTitle">🏆 Badge Supporter Officiel</h2>
-                        <p data-translate="officialBadgeDescription">Affichez votre passion pour votre club favori avec un badge officiel à côté de votre nom d'utilisateur.</p>
-                        <div class="benefits-list">
-                            <div class="benefit" data-translate="benefit1">✨ Badge vérifié</div>
-                            <div class="benefit" data-translate="benefit2">🌟 Statut premium</div>
-                            <div class="benefit" data-translate="benefit3">💬 Visible partout</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="clubs-section">
-                    <h3 data-translate="chooseClub">Choisissez votre club</h3>
-                    <div class="clubs-grid">
-                        <div class="club-option" onclick="selectBadge('real-sociedad')">
-                            <img src="./logos/real-sociedad.png" alt="Real Sociedad" class="club-logo">
-                            <div class="club-info">
-                                <h4>Real Sociedad</h4>
-                                <p class="price">4.99€<span data-translate="perMonth">/mois</span></p>
-                                <div class="tier standard">Standard</div>
-                            </div>
-                        </div>
-                        
-                        <div class="club-option" onclick="selectBadge('arsenal')">
-                            <img src="./logos/arsenal.png" alt="Arsenal FC" class="club-logo">
-                            <div class="club-info">
-                                <h4>Arsenal FC</h4>
-                                <p class="price">9.99€<span data-translate="perMonth">/mois</span></p>
-                                <div class="tier premium">Premium</div>
-                            </div>
-                        </div>
-                        
-                        <div class="club-option" onclick="selectBadge('barcelona')">
-                            <img src="./logos/barcelona.png" alt="FC Barcelona" class="club-logo">
-                            <div class="club-info">
-                                <h4>FC Barcelona</h4>
-                                <p class="price">19.99€<span data-translate="perMonth">/mois</span></p>
-                                <div class="tier legend" data-translate="legend">Légende</div>
-                            </div>
-                        </div>
-                        
-                        <div class="club-option" onclick="selectBadge('psg')">
-                            <img src="./logos/psg.png" alt="Paris Saint-Germain" class="club-logo">
-                            <div class="club-info">
-                                <h4>Paris SG</h4>
-                                <p class="price">19.99€<span data-translate="perMonth">/mois</span></p>
-                                <div class="tier legend" data-translate="legend">Légende</div>
-                            </div>
-                        </div>
-                        
-                        <div class="club-option" onclick="selectBadge('man-city')">
-                            <img src="./logos/man-city.png" alt="Manchester City" class="club-logo">
-                            <div class="club-info">
-                                <h4>Manchester City</h4>
-                                <p class="price">9.99€<span data-translate="perMonth">/mois</span></p>
-                                <div class="tier premium">Premium</div>
-                            </div>
-                        </div>
-                        
-                        <div class="club-option" onclick="selectBadge('juventus')">
-                            <img src="./logos/juventus.png" alt="Juventus FC" class="club-logo">
-                            <div class="club-info">
-                                <h4>Juventus FC</h4>
-                                <p class="price">9.99€<span data-translate="perMonth">/mois</span></p>
-                                <div class="tier premium">Premium</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="purchase-panel" id="purchase-panel" style="display: none;">
-            <div class="purchase-content">
-                <img id="selected-logo" src="" alt="" class="selected-logo">
-                <div class="selected-details">
-                    <h4 id="selected-name"></h4>
-                    <p id="selected-price"></p>
-                    <div class="features">
-                        <span data-translate="feature1">✓ Badge officiel</span>
-                        <span data-translate="feature2">✓ Statut vérifié</span>
-                    </div>
-                </div>
-                <button class="purchase-btn" onclick="simulatePurchase()">
-                    <span class="btn-text" data-translate="activateBadge">Activer Badge</span>
-                    <span class="btn-icon">🏆</span>
-                </button>
-                <p class="disclaimer" data-translate="disclaimer">* Version prototype - Aucun paiement réel</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="success-modal" class="modal" style="display: none;">
-        <div class="modal-overlay" onclick="closeModal()"></div>
-        <div class="modal-content">
-            <div class="success-animation">🎉</div>
-            <h2 data-translate="successTitle">Badge Activé !</h2>
-            <p><span data-translate="successText1">Votre badge</span> <strong id="activated-club"></strong> <span data-translate="successText2">est maintenant visible sur votre profil.</span></p>
-            <div class="modal-actions">
-                <button class="primary-btn" onclick="closeModal()" data-translate="viewProfile">Voir mon profil</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let selectedBadgeInfo = null;
-
-        // --- GESTION DE LA LANGUE ---
-        const translations = {
-            fr: {
-                badgeSystem: "Badge System",
-                showPassion: "Affichez votre passion officielle",
-                login: "Connexion",
-                firstNamePlaceholder: "Prénom",
-                lastNamePlaceholder: "Nom",
-                connect: "Se connecter",
-                forYou: "Pour vous",
-                following: "Abonnements",
-                trends: "Tendances",
-                profile: "Profil",
-                demoMode: "⚠️ Mode démonstration - Fonctionnalités limitées",
-                followingStat: "Suivis",
-                followersStat: "Followers",
-                likesStat: "J'aime",
-                editProfile: "Modifier le profil",
-                bioText: "❤️ Passionné de football • 🎂 Supporter depuis toujours",
-                videos: "Vidéos",
-                likes: "J'aime",
-                shareFirstVideo: "Partage ta première vidéo",
-                videosAppearHere: "Tes vidéos apparaîtront ici",
-                createVideo: "+ Créer une vidéo",
-                back: "← Retour",
-                settings: "Paramètres",
-                customization: "Personnalisation",
-                supporterBadge: "Badge Supporter",
-                selectBadgeTitle: "Badge Supporter",
-                officialBadgeTitle: "🏆 Badge Supporter Officiel",
-                officialBadgeDescription: "Affichez votre passion pour votre club favori avec un badge officiel à côté de votre nom d'utilisateur.",
-                benefit1: "✨ Badge vérifié",
-                benefit2: "🌟 Statut premium",
-                benefit3: "💬 Visible partout",
-                chooseClub: "Choisissez votre club",
-                perMonth: "/mois",
-                legend: "Légende",
-                feature1: "✓ Badge officiel",
-                feature2: "✓ Statut vérifié",
-                activateBadge: "Activer Badge",
-                disclaimer: "* Version prototype - Aucun paiement réel",
-                successTitle: "Badge Activé !",
-                successText1: "Votre badge",
-                successText2: "est maintenant visible sur votre profil.",
-                viewProfile: "Voir mon profil"
-            },
-            en: {
-                badgeSystem: "Badge System",
-                showPassion: "Show your official passion",
-                login: "Login",
-                firstNamePlaceholder: "First Name",
-                lastNamePlaceholder: "Last Name",
-                connect: "Connect",
-                forYou: "For You",
-                following: "Following",
-                trends: "Trends",
-                profile: "Profile",
-                demoMode: "⚠️ Demo Mode - Limited features",
-                followingStat: "Following",
-                followersStat: "Followers",
-                likesStat: "Likes",
-                editProfile: "Edit profile",
-                bioText: "❤️ Football fan • 🎂 Lifelong supporter",
-                videos: "Videos",
-                likes: "Likes",
-                shareFirstVideo: "Share your first video",
-                videosAppearHere: "Your videos will appear here",
-                createVideo: "+ Create video",
-                back: "← Back",
-                settings: "Settings",
-                customization: "Customization",
-                supporterBadge: "Supporter Badge",
-                selectBadgeTitle: "Supporter Badge",
-                officialBadgeTitle: "🏆 Official Supporter Badge",
-                officialBadgeDescription: "Show your passion for your favorite club with an official badge next to your username.",
-                benefit1: "✨ Verified badge",
-                benefit2: "🌟 Premium status",
-                benefit3: "💬 Visible everywhere",
-                chooseClub: "Choose your club",
-                perMonth: "/month",
-                legend: "Legend",
-                feature1: "✓ Official badge",
-                feature2: "✓ Verified status",
-                activateBadge: "Activate Badge",
-                disclaimer: "* Prototype version - No real payment",
-                successTitle: "Badge Activated!",
-                successText1: "Your",
-                successText2: "badge is now visible on your profile.",
-                viewProfile: "View my profile"
-            },
-            es: {
-                badgeSystem: "Sistema de Insignias",
-                showPassion: "Muestra tu pasión oficial",
-                login: "Iniciar sesión",
-                firstNamePlaceholder: "Nombre",
-                lastNamePlaceholder: "Apellido",
-                connect: "Conectar",
-                forYou: "Para ti",
-                following: "Siguiendo",
-                trends: "Tendencias",
-                profile: "Perfil",
-                demoMode: "⚠️ Modo de demostración - Funciones limitadas",
-                followingStat: "Siguiendo",
-                followersStat: "Seguidores",
-                likesStat: "Me gusta",
-                editProfile: "Editar perfil",
-                bioText: "❤️ Apasionado del fútbol • 🎂 Fan de toda la vida",
-                videos: "Videos",
-                likes: "Me gusta",
-                shareFirstVideo: "Comparte tu primer video",
-                videosAppearHere: "Tus videos aparecerán aquí",
-                createVideo: "+ Crear video",
-                back: "← Volver",
-                settings: "Ajustes",
-                customization: "Personalización",
-                supporterBadge: "Insignia de Aficionado",
-                selectBadgeTitle: "Insignia de Aficionado",
-                officialBadgeTitle: "🏆 Insignia Oficial de Aficionado",
-                officialBadgeDescription: "Muestra tu pasión por tu club favorito con una insignia oficial junto a tu nombre de usuario.",
-                benefit1: "✨ Insignia verificada",
-                benefit2: "🌟 Estatus premium",
-                benefit3: "💬 Visible en todas partes",
-                chooseClub: "Elige tu club",
-                perMonth: "/mes",
-                legend: "Leyenda",
-                feature1: "✓ Insignia oficial",
-                feature2: "✓ Estatus verificado",
-                activateBadge: "Activar Insignia",
-                disclaimer: "* Versión prototipo - Sin pago real",
-                successTitle: "¡Insignia Activada!",
-                successText1: "Tu insignia de",
-                successText2: "ahora está visible en tu perfil.",
-                viewProfile: "Ver mi perfil"
-            }
-        };
-
-        function setLanguage(lang) {
-            const langStrings = translations[lang] || translations.fr; // Fallback sur le français
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (langStrings[key]) {
-                    el.textContent = langStrings[key];
-                }
-            });
-            document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-translate-placeholder');
-                if (langStrings[key]) {
-                    el.placeholder = langStrings[key];
-                }
-            });
-        }
-
-        // --- NAVIGATION ENTRE PAGES ---
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-        }
-
-        function showProfile() { showPage('profile-page'); }
-        function showSettings() { showPage('settings-page'); }
-        function showBadgeSelection() { showPage('badge-selection-page'); }
-
-        // --- LOGIQUE DE CONNEXION ---
-        function login() {
-            const firstName = document.getElementById('firstName').value.trim();
-            const lastName = document.getElementById('lastName').value.trim();
-
-            if (firstName && lastName) {
-                const username = `@${firstName.toLowerCase()}_${lastName.toLowerCase()}`;
-                document.getElementById('display-username').textContent = username;
-                showProfile();
-            } else {
-                alert("Veuillez remplir votre prénom et votre nom.");
-            }
-        }
-
-        // --- DONNÉES ET LOGIQUE DES BADGES ---
-        const clubData = {
-            'real-sociedad': { name: 'Real Sociedad', price: '4.99€/mois', logo: './logos/real-sociedad.png' },
-            'arsenal': { name: 'Arsenal FC', price: '9.99€/mois', logo: './logos/arsenal.png' },
-            'barcelona': { name: 'FC Barcelona', price: '19.99€/mois', logo: './logos/barcelona.png' },
-            'psg': { name: 'Paris SG', price: '19.99€/mois', logo: './logos/psg.png' },
-            'man-city': { name: 'Manchester City', price: '9.99€/mois', logo: './logos/man-city.png' },
-            'juventus': { name: 'Juventus FC', price: '9.99€/mois', logo: './logos/juventus.png' }
-        };
-
-        function selectBadge(clubId) {
-            selectedBadgeInfo = clubData[clubId];
-
-            document.getElementById('selected-logo').src = selectedBadgeInfo.logo;
-            document.getElementById('selected-name').textContent = selectedBadgeInfo.name;
-            document.getElementById('selected-price').textContent = selectedBadgeInfo.price;
-            document.getElementById('purchase-panel').style.display = 'flex';
-        }
-
-        function simulatePurchase() {
-            if (selectedBadgeInfo) {
-                const profileBadge = document.getElementById('profile-badge');
-                profileBadge.src = selectedBadgeInfo.logo;
-                profileBadge.style.display = 'block';
-
-                const badgePreview = document.getElementById('current-badge-preview');
-                badgePreview.innerHTML = `<img src="${selectedBadgeInfo.logo}" alt="${selectedBadgeInfo.name}" style="width: 24px; height: 24px; border-radius: 50%;">`;
-
-                document.getElementById('activated-club').textContent = selectedBadgeInfo.name;
-                document.getElementById('success-modal').style.display = 'flex';
-                document.getElementById('purchase-panel').style.display = 'none';
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('success-modal').style.display = 'none';
-            showProfile();
-        }
-
-        // --- INITIALISATION DE L'APPLICATION ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const userLang = navigator.language.split('-')[0]; // ex: "fr-FR" -> "fr"
-            setLanguage(userLang);
-            showPage('login-page');
-        });
-    </script>
 </body>
 </html>
