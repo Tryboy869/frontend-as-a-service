@@ -17,19 +17,19 @@
                         <path d="M27.1 10.7c1.3 1.1 2.8 1.7 4.4 1.7V8.9c-.9 0-1.8-.3-2.5-.8-.8-.6-1.4-1.4-1.7-2.3h-3.6V24c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2v-3.6c-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V10.7z" fill="#FE2C55"/>
                     </svg>
                 </div>
-                <h1>Badge System</h1>
-                <p class="subtitle">Affichez votre passion officielle</p>
+                <h1 data-translate="badgeSystem">Badge System</h1>
+                <p class="subtitle" data-translate="showPassion">Affichez votre passion officielle</p>
             </div>
             
             <div class="login-form">
-                <h2>Connexion</h2>
+                <h2 data-translate="login">Connexion</h2>
                 <div class="input-group">
                     <input type="text" id="firstName" placeholder="Prénom" required>
                 </div>
                 <div class="input-group">
                     <input type="text" id="lastName" placeholder="Nom" required>
                 </div>
-                <button class="login-btn" onclick="login()">Se connecter</button>
+                <button class="login-btn" onclick="login()" data-translate="connect">Se connecter</button>
             </div>
         </div>
     </div>
@@ -90,7 +90,7 @@
             <!-- Profile Content -->
             <main class="profile-content">
                 <div class="connection-warning">
-                    <p>⚠️ Mode démonstration - Fonctionnalités limitées</p>
+                    <p data-translate="demoMode">⚠️ Mode démonstration - Fonctionnalités limitées</p>
                 </div>
 
                 <div class="profile-header">
@@ -1373,6 +1373,312 @@
         // Variables globales
         let currentUser = null;
         let selectedBadge = null;
+        let currentLanguage = 'fr';
+        
+        // Système de traduction
+        const translations = {
+            fr: {
+                // Login page
+                badgeSystem: 'Badge System',
+                showPassion: 'Affichez votre passion officielle',
+                login: 'Connexion',
+                firstName: 'Prénom',
+                lastName: 'Nom',
+                connect: 'Se connecter',
+                fillFields: 'Veuillez remplir tous les champs',
+                
+                // Header & Navigation
+                tiktok: 'TikTok',
+                back: 'Retour',
+                settings: 'Paramètres et confidentialité',
+                
+                // Profile
+                demoMode: 'Mode démonstration - Fonctionnalités limitées',
+                following: 'Suivis',
+                followers: 'Followers',
+                likes: 'J'aime',
+                editProfile: 'Modifier le profil',
+                share: 'Partager',
+                footballFan: 'Passionné de football • Supporter depuis toujours',
+                videos: 'Vidéos',
+                photos: 'Photos',
+                collections: 'Collections',
+                shareFirst: 'Partage ta première vidéo',
+                videosHere: 'Tes vidéos apparaîtront ici',
+                createVideo: '+ Créer une vidéo',
+                
+                // Navigation sidebar
+                forYou: 'Pour vous',
+                subscriptions: 'Abonnements',
+                trending: 'Tendances',
+                profile: 'Profil',
+                suggested: 'Comptes suggérés',
+                
+                // Settings
+                account: 'Compte',
+                languages: 'Langues',
+                french: 'Français',
+                darkMode: 'Mode sombre',
+                disabled: 'Désactivé',
+                screenTime: 'Temps d\'écran',
+                manageTime: 'Gérer le temps',
+                personalization: 'Personnalisation',
+                supporterBadge: 'Badge Supporter',
+                showPassionShort: 'Affichez votre passion',
+                accessibility: 'Accessibilité',
+                helpOptions: 'Options d\'aide',
+                familyConnection: 'Connexion Famille',
+                parentalControl: 'Contrôle parental',
+                storage: 'Stockage',
+                offlineVideos: 'Vidéos hors ligne',
+                manageCache: 'Gérer le cache',
+                freeSpace: 'Libérer de l\'espace',
+                cleanData: 'Nettoyer les données',
+                noBadge: 'Aucun badge',
+                
+                // Badge selection
+                selectBadge: 'Sélectionner Badge Supporter',
+                officialBadge: 'Badge Supporter Officiel',
+                badgeDescription: 'Affichez votre passion pour votre club favori avec un badge officiel à côté de votre nom d\'utilisateur. Votre badge apparaîtra sur votre profil et à côté de tous vos commentaires.',
+                verifiedBadge: 'Badge vérifié officiel',
+                exclusiveDesign: 'Design exclusif du club',
+                premiumStatus: 'Statut de supporter premium',
+                visibleBadge: 'Badge visible sur tous vos contenus',
+                chooseClub: 'Choisissez votre club',
+                month: '/mois',
+                standard: 'Standard',
+                premium: 'Premium',
+                legend: 'Légende',
+                officialBadgeShort: 'Badge officiel',
+                verifiedStatus: 'Statut vérifié',
+                activateBadge: 'Activer Badge',
+                prototypeDisclaimer: '* Version prototype - Aucun paiement réel ne sera effectué',
+                
+                // Success modal
+                badgeActivated: 'Badge Activé avec Succès !',
+                badgeActiveMessage: 'est maintenant actif et visible sur votre profil.',
+                viewProfile: 'Voir mon profil',
+                perfect: 'Parfait !'
+            },
+            en: {
+                // Login page
+                badgeSystem: 'Badge System',
+                showPassion: 'Display your official passion',
+                login: 'Login',
+                firstName: 'First Name',
+                lastName: 'Last Name',
+                connect: 'Sign In',
+                fillFields: 'Please fill in all fields',
+                
+                // Header & Navigation
+                tiktok: 'TikTok',
+                back: 'Back',
+                settings: 'Settings and Privacy',
+                
+                // Profile
+                demoMode: 'Demo mode - Limited features',
+                following: 'Following',
+                followers: 'Followers',
+                likes: 'Likes',
+                editProfile: 'Edit Profile',
+                share: 'Share',
+                footballFan: 'Football enthusiast • Lifelong supporter',
+                videos: 'Videos',
+                photos: 'Photos',
+                collections: 'Collections',
+                shareFirst: 'Share your first video',
+                videosHere: 'Your videos will appear here',
+                createVideo: '+ Create a video',
+                
+                // Navigation sidebar
+                forYou: 'For You',
+                subscriptions: 'Following',
+                trending: 'Trending',
+                profile: 'Profile',
+                suggested: 'Suggested accounts',
+                
+                // Settings
+                account: 'Account',
+                languages: 'Languages',
+                french: 'English',
+                darkMode: 'Dark Mode',
+                disabled: 'Disabled',
+                screenTime: 'Screen Time',
+                manageTime: 'Manage time',
+                personalization: 'Personalization',
+                supporterBadge: 'Supporter Badge',
+                showPassionShort: 'Show your passion',
+                accessibility: 'Accessibility',
+                helpOptions: 'Help options',
+                familyConnection: 'Family Pairing',
+                parentalControl: 'Parental controls',
+                storage: 'Storage',
+                offlineVideos: 'Offline Videos',
+                manageCache: 'Manage cache',
+                freeSpace: 'Free up space',
+                cleanData: 'Clean data',
+                noBadge: 'No badge',
+                
+                // Badge selection
+                selectBadge: 'Select Supporter Badge',
+                officialBadge: 'Official Supporter Badge',
+                badgeDescription: 'Show your passion for your favorite club with an official badge next to your username. Your badge will appear on your profile and next to all your comments.',
+                verifiedBadge: 'Official verified badge',
+                exclusiveDesign: 'Exclusive club design',
+                premiumStatus: 'Premium supporter status',
+                visibleBadge: 'Badge visible on all your content',
+                chooseClub: 'Choose your club',
+                month: '/month',
+                standard: 'Standard',
+                premium: 'Premium',
+                legend: 'Legend',
+                officialBadgeShort: 'Official badge',
+                verifiedStatus: 'Verified status',
+                activateBadge: 'Activate Badge',
+                prototypeDisclaimer: '* Prototype version - No real payment will be made',
+                
+                // Success modal
+                badgeActivated: 'Badge Successfully Activated!',
+                badgeActiveMessage: 'is now active and visible on your profile.',
+                viewProfile: 'View my profile',
+                perfect: 'Perfect!'
+            },
+            es: {
+                // Login page
+                badgeSystem: 'Sistema de Insignias',
+                showPassion: 'Muestra tu pasión oficial',
+                login: 'Iniciar Sesión',
+                firstName: 'Nombre',
+                lastName: 'Apellido',
+                connect: 'Conectar',
+                fillFields: 'Por favor, rellena todos los campos',
+                
+                // Header & Navigation
+                tiktok: 'TikTok',
+                back: 'Volver',
+                settings: 'Configuración y Privacidad',
+                
+                // Profile
+                demoMode: 'Modo demostración - Funciones limitadas',
+                following: 'Siguiendo',
+                followers: 'Seguidores',
+                likes: 'Me gusta',
+                editProfile: 'Editar Perfil',
+                share: 'Compartir',
+                footballFan: 'Apasionado del fútbol • Aficionado de toda la vida',
+                videos: 'Videos',
+                photos: 'Fotos',
+                collections: 'Colecciones',
+                shareFirst: 'Comparte tu primer video',
+                videosHere: 'Tus videos aparecerán aquí',
+                createVideo: '+ Crear video',
+                
+                // Navigation sidebar
+                forYou: 'Para Ti',
+                subscriptions: 'Siguiendo',
+                trending: 'Tendencias',
+                profile: 'Perfil',
+                suggested: 'Cuentas sugeridas',
+                
+                // Settings
+                account: 'Cuenta',
+                languages: 'Idiomas',
+                french: 'Español',
+                darkMode: 'Modo Oscuro',
+                disabled: 'Deshabilitado',
+                screenTime: 'Tiempo de Pantalla',
+                manageTime: 'Gestionar tiempo',
+                personalization: 'Personalización',
+                supporterBadge: 'Insignia de Aficionado',
+                showPassionShort: 'Muestra tu pasión',
+                accessibility: 'Accesibilidad',
+                helpOptions: 'Opciones de ayuda',
+                familyConnection: 'Conexión Familiar',
+                parentalControl: 'Control parental',
+                storage: 'Almacenamiento',
+                offlineVideos: 'Videos Sin Conexión',
+                manageCache: 'Gestionar caché',
+                freeSpace: 'Liberar espacio',
+                cleanData: 'Limpiar datos',
+                noBadge: 'Sin insignia',
+                
+                // Badge selection
+                selectBadge: 'Seleccionar Insignia de Aficionado',
+                officialBadge: 'Insignia Oficial de Aficionado',
+                badgeDescription: 'Muestra tu pasión por tu club favorito con una insignia oficial junto a tu nombre de usuario. Tu insignia aparecerá en tu perfil y junto a todos tus comentarios.',
+                verifiedBadge: 'Insignia oficial verificada',
+                exclusiveDesign: 'Diseño exclusivo del club',
+                premiumStatus: 'Estado de aficionado premium',
+                visibleBadge: 'Insignia visible en todo tu contenido',
+                chooseClub: 'Elige tu club',
+                month: '/mes',
+                standard: 'Estándar',
+                premium: 'Premium',
+                legend: 'Leyenda',
+                officialBadgeShort: 'Insignia oficial',
+                verifiedStatus: 'Estado verificado',
+                activateBadge: 'Activar Insignia',
+                prototypeDisclaimer: '* Versión prototipo - No se realizará ningún pago real',
+                
+                // Success modal
+                badgeActivated: '¡Insignia Activada con Éxito!',
+                badgeActiveMessage: 'ahora está activa y visible en tu perfil.',
+                viewProfile: 'Ver mi perfil',
+                perfect: '¡Perfecto!'
+            }
+        };
+        
+        // Fonction pour détecter et définir la langue
+        function setLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            if (browserLang.startsWith('en')) {
+                currentLanguage = 'en';
+            } else if (browserLang.startsWith('es')) {
+                currentLanguage = 'es';
+            } else {
+                currentLanguage = 'fr'; // Par défaut
+            }
+            
+            updateTexts();
+        }
+        
+        // Fonction pour mettre à jour tous les textes
+        function updateTexts() {
+            const t = translations[currentLanguage];
+            
+            // Fonction helper pour mettre à jour le texte d'un élément
+            function updateText(id, key) {
+                const element = document.getElementById(id) || document.querySelector(`[data-text="${id}"]`);
+                if (element && t[key]) {
+                    element.textContent = t[key];
+                }
+            }
+            
+            // Fonction pour mettre à jour les placeholders
+            function updatePlaceholder(id, key) {
+                const element = document.getElementById(id);
+                if (element && t[key]) {
+                    element.placeholder = t[key];
+                }
+            }
+            
+            // Mise à jour des textes (sera appelée après le DOM ready)
+            setTimeout(() => {
+                // Login page
+                updatePlaceholder('firstName', 'firstName');
+                updatePlaceholder('lastName', 'lastName');
+                
+                // Mettre à jour via les attributs data-text pour éviter les conflits
+                const elementsToUpdate = document.querySelectorAll('[data-translate]');
+                elementsToUpdate.forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (t[key]) {
+                        element.textContent = t[key];
+                    }
+                });
+            }, 100);
+        }
         
         // Données des clubs
         const clubs = {
@@ -1577,6 +1883,9 @@
         
         // Initialisation au chargement
         window.onload = function() {
+            // Détecter et définir la langue automatiquement
+            setLanguage();
+            
             // Gérer les images qui ne se chargent pas
             document.querySelectorAll('img[src^="./logos/"]').forEach(img => {
                 img.onerror = function() {
