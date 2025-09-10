@@ -362,6 +362,17 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             max-width: 400px;
             margin: 50px auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        #login-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
         
         .logo-section {
@@ -1178,17 +1189,33 @@
             }
         };
         
-        // Fonctions de navigation
+        // Fonctions de navigation avec debug
         function showPage(pageId) {
+            console.log('Tentative de navigation vers:', pageId);
+            
+            // Masquer toutes les pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
+                console.log('Masquage page:', page.id);
             });
-            document.getElementById(pageId).classList.add('active');
+            
+            // Afficher la page demandée
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                console.log('Page affichée:', pageId);
+            } else {
+                console.error('Page non trouvée:', pageId);
+            }
         }
         
         function login() {
+            console.log('Fonction login appelée');
+            
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
+            
+            console.log('Données saisies:', { firstName, lastName });
             
             if (!firstName || !lastName) {
                 alert('Veuillez remplir tous les champs');
@@ -1201,15 +1228,25 @@
                 badge: localStorage.getItem('userBadge') || null
             };
             
+            console.log('Utilisateur créé:', currentUser);
+            
             // Mettre à jour le nom d'utilisateur pour web
             const username = `@${firstName.toLowerCase()}${lastName.toLowerCase()}`;
-            document.getElementById('display-username-web').textContent = username;
+            const usernameElement = document.getElementById('display-username-web');
+            if (usernameElement) {
+                usernameElement.textContent = username;
+                console.log('Username mis à jour:', username);
+            } else {
+                console.warn('Element display-username-web non trouvé');
+            }
             
             // Afficher le badge s'il existe
             if (currentUser.badge) {
                 showUserBadgeWeb(currentUser.badge);
             }
             
+            // Transition vers la page profil
+            console.log('Navigation vers profile-page...');
             showPage('profile-page');
         }
         
@@ -1332,12 +1369,35 @@
         
         // Initialisation au chargement
         window.onload = function() {
+            console.log('Application initialisée');
+            
             // Vérifier s'il y a un utilisateur sauvegardé
             const savedBadge = localStorage.getItem('userBadge');
             if (savedBadge) {
                 // Pour la démo, on peut pré-remplir les champs
                 document.getElementById('firstName').value = 'Demo';
                 document.getElementById('lastName').value = 'User';
+                console.log('Champs pré-remplis pour la démo');
+            }
+            
+            // Ajouter événement Enter sur les champs de connexion
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            
+            if (firstNameInput && lastNameInput) {
+                firstNameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        lastNameInput.focus();
+                    }
+                });
+                
+                lastNameInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        login();
+                    }
+                });
+                
+                console.log('Événements clavier ajoutés');
             }
             
             // Ajouter des événements pour les images qui ne se chargent pas
@@ -1368,6 +1428,8 @@
                     
                     img.src = canvas.toDataURL();
                     img.style.borderRadius = '50%';
+                    
+                    console.log('Placeholder créé pour:', clubName);
                 };
             });
         };
