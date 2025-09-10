@@ -12,7 +12,7 @@
         <div class="login-container">
             <div class="logo-section">
                 <div class="tiktok-logo">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <svg width="50" height="50" viewBox="0 0 40 40" fill="none">
                         <path d="M29.4 12.4c-1.4-1-2.3-2.6-2.3-4.4V6h-4.5v18c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2V15c-.4-.1-.9-.1-1.3-.1-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V16.4c1.9 1.4 4.3 2.2 6.8 2.2v-4.5c-1.6 0-3.1-.6-4.4-1.7z" fill="#25F4EE"/>
                         <path d="M27.1 10.7c1.3 1.1 2.8 1.7 4.4 1.7V8.9c-.9 0-1.8-.3-2.5-.8-.8-.6-1.4-1.4-1.7-2.3h-3.6V24c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2v-3.6c-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V10.7z" fill="#FE2C55"/>
                     </svg>
@@ -34,159 +34,225 @@
         </div>
     </div>
 
-    <!-- PAGE 2: PROFIL TIKTOK WEB -->
+    <!-- PAGE 2: PROFIL TIKTOK -->
     <div id="profile-page" class="page">
-        <div class="tiktok-web-container">
-            <!-- Header TikTok -->
-            <div class="tiktok-header">
-                <div class="tiktok-logo-header">
-                    <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+        <!-- Header TikTok -->
+        <header class="tiktok-header">
+            <div class="header-left">
+                <div class="tiktok-logo-small">
+                    <svg width="30" height="30" viewBox="0 0 40 40" fill="none">
                         <path d="M29.4 12.4c-1.4-1-2.3-2.6-2.3-4.4V6h-4.5v18c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2V15c-.4-.1-.9-.1-1.3-.1-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V16.4c1.9 1.4 4.3 2.2 6.8 2.2v-4.5c-1.6 0-3.1-.6-4.4-1.7z" fill="#25F4EE"/>
                         <path d="M27.1 10.7c1.3 1.1 2.8 1.7 4.4 1.7V8.9c-.9 0-1.8-.3-2.5-.8-.8-.6-1.4-1.4-1.7-2.3h-3.6V24c0 2.5-2 4.5-4.5 4.5s-4.5-2-4.5-4.5 2-4.5 4.5-4.5c.5 0 .9.1 1.3.2v-3.6c-4.9 0-8.9 4-8.9 8.9s4 8.9 8.9 8.9 8.9-4 8.9-8.9V10.7z" fill="#FE2C55"/>
                     </svg>
-                    <h1>TikTok</h1>
                 </div>
-                
-                <div class="search-bar">
-                    <input type="text" placeholder="Rechercher des comptes et des vidéos">
-                </div>
-                
-                <div class="user-actions">
-                    <a href="#" class="upload-btn-header">
-                        <span>+</span>
-                        <span>Téléverser</span>
-                    </a>
-                    <div class="profile-menu" onclick="showSettings()">⚙️</div>
-                </div>
+                <h1>TikTok</h1>
             </div>
-            
-            <!-- Profil principal -->
-            <div class="tiktok-web-profile">
-                <div class="profile-info-section">
-                    <img class="profile-avatar-large" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='60' fill='%23666'/%3E%3Ctext x='60' y='75' text-anchor='middle' font-size='40' fill='white'%3E👤%3C/text%3E%3C/svg%3E" alt="Avatar">
-                    
-                    <div class="profile-details">
-                        <div class="username-badge-web">
-                            <span class="username-large" id="display-username-web">@supporter</span>
-                            <img class="club-badge-web" id="profile-badge-web" src="" alt="Badge Club" style="display: none;">
-                        </div>
-                        
-                        <div class="stats-web">
-                            <div class="stat-web">
-                                <div class="stat-number-web">2041</div>
-                                <div class="stat-label-web">Suivis</div>
-                            </div>
-                            <div class="stat-web">
-                                <div class="stat-number-web">93</div>
-                                <div class="stat-label-web">Abonnés</div>
-                            </div>
-                            <div class="stat-web">
-                                <div class="stat-number-web">247</div>
-                                <div class="stat-label-web">J'aime</div>
-                            </div>
-                        </div>
-                        
-                        <div class="profile-actions-web">
-                            <button class="follow-btn-web">Suivre</button>
-                            <button class="message-btn-web">Messages</button>
-                            <button class="settings-btn-web" onclick="showSettings()">Paramètres</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="content-tabs-web">
-                    <div class="tab-web active">Vidéos</div>
-                    <div class="tab-web">J'aime</div>
-                </div>
-                
-                <div class="videos-grid-web">
-                    <div class="video-placeholder-web">
-                        <div class="icon">📹</div>
-                        <p>Téléversez votre première vidéo</p>
-                    </div>
-                    <div class="video-placeholder-web">
-                        <div class="icon">🎵</div>
-                        <p>Créez du contenu</p>
-                    </div>
-                    <div class="video-placeholder-web">
-                        <div class="icon">✨</div>
-                        <p>Partagez vos moments</p>
-                    </div>
-                </div>
+            <div class="header-right">
+                <button class="header-btn">🔍</button>
+                <button class="header-btn" onclick="showSettings()">⚙️</button>
             </div>
-        </div>
-    </div>
+        </header>
 
-    <!-- PAGE 3: PARAMÈTRES WEB -->
-    <div id="settings-page" class="page">
-        <div class="tiktok-web-container">
-            <!-- Header TikTok -->
-            <div class="tiktok-header">
-                <div class="tiktok-logo-header">
-                    <button class="back-btn-web" onclick="showProfile()">← Retour</button>
+        <div class="main-content">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar">
+                <div class="nav-section">
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-label">Pour vous</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">👥</span>
+                        <span class="nav-label">Abonnements</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <span class="nav-icon">🔥</span>
+                        <span class="nav-label">Tendances</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <span class="nav-icon">👤</span>
+                        <span class="nav-label">Profil</span>
+                    </a>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Rechercher des comptes et des vidéos">
+                
+                <div class="nav-section">
+                    <h3 class="nav-section-title">Comptes suggérés</h3>
+                    <div class="suggested-account">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23ff6b6b'/%3E%3Ctext x='16' y='20' text-anchor='middle' font-size='14' fill='white'%3E👑%3C/text%3E%3C/svg%3E" alt="Compte suggéré" class="account-avatar">
+                        <div class="account-info">
+                            <span class="account-name">creator_pro</span>
+                            <span class="account-followers">2.1M</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="user-actions">
-                    <div class="profile-menu">⚙️</div>
+            </nav>
+
+            <!-- Profile Content -->
+            <main class="profile-content">
+                <div class="connection-warning">
+                    <p>⚠️ Mode démonstration - Fonctionnalités limitées</p>
                 </div>
-            </div>
-            
-            <div class="settings-web-content">
-                <div class="settings-sidebar">
-                    <h2>Paramètres et confidentialité</h2>
-                    <div class="settings-menu-web">
-                        <div class="settings-category">
-                            <h3>Compte</h3>
-                            <div class="settings-item-web">
-                                <span class="icon">🔤</span>
-                                <span class="label">Langues</span>
-                            </div>
-                            <div class="settings-item-web">
-                                <span class="icon">🌙</span>
-                                <span class="label">Affichage</span>
-                            </div>
-                            <div class="settings-item-web">
-                                <span class="icon">⏰</span>
-                                <span class="label">Temps d'écran</span>
-                            </div>
-                            <div class="settings-item-web">
-                                <span class="icon">♿</span>
-                                <span class="label">Accessibilité</span>
+
+                <div class="profile-header">
+                    <div class="profile-info">
+                        <div class="avatar-container">
+                            <img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='60' fill='%236366f1'/%3E%3Ctext x='60' y='75' text-anchor='middle' font-size='50' fill='white'%3E👤%3C/text%3E%3C/svg%3E" alt="Avatar">
+                        </div>
+                        
+                        <div class="profile-details">
+                            <div class="username-container">
+                                <h2 class="username" id="display-username">@supporter</h2>
+                                <img class="club-badge" id="profile-badge" src="" alt="Badge Club" style="display: none;">
                             </div>
                             
-                            <!-- NOUVELLE SECTION BADGE -->
-                            <div class="settings-item-web badge-section-web active" onclick="showBadgeSelection()">
-                                <span class="icon">🏆</span>
-                                <span class="label">Badges Supporter</span>
-                                <span class="badge-preview-web" id="current-badge-preview-web"></span>
+                            <div class="stats-container">
+                                <div class="stat">
+                                    <div class="stat-number">2,041</div>
+                                    <div class="stat-label">Suivis</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">93</div>
+                                    <div class="stat-label">Followers</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">0</div>
+                                    <div class="stat-label">J'aime</div>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="settings-category">
-                            <h3>Données</h3>
-                            <div class="settings-item-web">
-                                <span class="icon">📱</span>
-                                <span class="label">Vidéos hors ligne</span>
+                            
+                            <div class="action-buttons">
+                                <button class="edit-profile-btn">Modifier le profil</button>
+                                <button class="share-btn">Partager</button>
+                                <button class="more-btn">⋯</button>
                             </div>
-                            <div class="settings-item-web">
-                                <span class="icon">🗑️</span>
-                                <span class="label">Libérer de l'espace</span>
+                            
+                            <div class="bio-section">
+                                <p class="bio">❤️ Passionné de football • 🎂 Supporter depuis toujours</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="settings-main-content">
-                    <div class="settings-panel">
-                        <h2>Configuration générale</h2>
-                        <p>Gérez vos préférences de compte et de confidentialité.</p>
-                        
-                        <div class="settings-section">
-                            <h3>Badges Supporter 🏆</h3>
-                            <p>Affichez votre passion pour votre club favori avec un badge officiel à côté de votre nom d'utilisateur.</p>
-                            <button class="feature-btn" onclick="showBadgeSelection()">Découvrir les badges</button>
+                <div class="content-tabs">
+                    <div class="tab active">Vidéos</div>
+                    <div class="tab">Photos</div>
+                    <div class="tab">J'aime</div>
+                    <div class="tab">Collections</div>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-placeholder">
+                        <div class="placeholder-icon">📷</div>
+                        <h3>Partage ta première vidéo</h3>
+                        <p>Tes vidéos apparaîtront ici</p>
+                        <button class="upload-btn">+ Créer une vidéo</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- PAGE 3: PARAMÈTRES -->
+    <div id="settings-page" class="page">
+        <header class="tiktok-header">
+            <div class="header-left">
+                <button class="back-btn" onclick="showProfile()">← Retour</button>
+                <h1>Paramètres et confidentialité</h1>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="settings-container">
+                <div class="settings-grid">
+                    <div class="settings-column">
+                        <h3 class="settings-section-title">Compte</h3>
+                        <div class="settings-list">
+                            <div class="settings-item">
+                                <span class="icon">🔤</span>
+                                <div class="setting-info">
+                                    <span class="label">Langues</span>
+                                    <span class="description">Français</span>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
+                            
+                            <div class="settings-item">
+                                <span class="icon">🌙</span>
+                                <div class="setting-info">
+                                    <span class="label">Mode sombre</span>
+                                    <span class="description">Désactivé</span>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
+                            
+                            <div class="settings-item">
+                                <span class="icon">⏰</span>
+                                <div class="setting-info">
+                                    <span class="label">Temps d'écran</span>
+                                    <span class="description">Gérer le temps</span>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-column">
+                        <h3 class="settings-section-title">Personnalisation</h3>
+                        <div class="settings-list">
+                            <!-- SECTION BADGE MISE EN AVANT -->
+                            <div class="settings-item badge-section" onclick="showBadgeSelection()">
+                                <span class="icon">🏆</span>
+                                <div class="setting-info">
+                                    <span class="label">Badge Supporter</span>
+                                    <span class="description">Affichez votre passion</span>
+                                    <div class="badge-preview-container">
+                                        <span class="badge-preview" id="current-badge-preview"></span>
+                                    </div>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
+                            
+                            <div class="settings-item">
+                                <span class="icon">♿</span>
+                                <div class="setting-info">
+                                    <span class="label">Accessibilité</span>
+                                    <span class="description">Options d'aide</span>
+                                </div>
+                                <span class="notification-dot"></span>
+                                <span class="arrow">›</span>
+                            </div>
+                            
+                            <div class="settings-item">
+                                <span class="icon">👨‍👩‍👧‍👦</span>
+                                <div class="setting-info">
+                                    <span class="label">Connexion Famille</span>
+                                    <span class="description">Contrôle parental</span>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-column">
+                        <h3 class="settings-section-title">Stockage</h3>
+                        <div class="settings-list">
+                            <div class="settings-item">
+                                <span class="icon">📱</span>
+                                <div class="setting-info">
+                                    <span class="label">Vidéos hors ligne</span>
+                                    <span class="description">Gérer le cache</span>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
+                            
+                            <div class="settings-item">
+                                <span class="icon">🗑️</span>
+                                <div class="setting-info">
+                                    <span class="label">Libérer de l'espace</span>
+                                    <span class="description">Nettoyer les données</span>
+                                </div>
+                                <span class="arrow">›</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,137 +260,126 @@
         </div>
     </div>
 
-    <!-- PAGE 4: SÉLECTION BADGE WEB -->
+    <!-- PAGE 4: SÉLECTION BADGE -->
     <div id="badge-selection-page" class="page">
-        <div class="tiktok-web-container">
-            <!-- Header TikTok -->
-            <div class="tiktok-header">
-                <div class="tiktok-logo-header">
-                    <button class="back-btn-web" onclick="showSettings()">← Retour aux paramètres</button>
-                </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Rechercher des comptes et des vidéos">
-                </div>
-                <div class="user-actions">
-                    <div class="profile-menu">⚙️</div>
-                </div>
+        <header class="tiktok-header">
+            <div class="header-left">
+                <button class="back-btn" onclick="showSettings()">← Retour</button>
+                <h1>Sélectionner Badge Supporter</h1>
             </div>
-            
-            <div class="badge-selection-web">
-                <div class="badge-selection-header">
-                    <h2>Badges Supporter Officiels</h2>
-                    <p>Affichez votre passion pour votre club favori avec un badge vérifié qui apparaîtra à côté de votre nom d'utilisateur sur tous vos contenus TikTok.</p>
+        </header>
+
+        <div class="main-content">
+            <div class="badge-selection-container">
+                <div class="badge-intro">
+                    <div class="intro-card">
+                        <h2>🏆 Badge Supporter Officiel</h2>
+                        <p>Affichez votre passion pour votre club favori avec un badge officiel à côté de votre nom d'utilisateur. Votre badge apparaîtra sur votre profil et à côté de tous vos commentaires.</p>
+                        <div class="benefits-list">
+                            <div class="benefit">✨ Badge vérifié officiel</div>
+                            <div class="benefit">🎨 Design exclusif du club</div>
+                            <div class="benefit">🌟 Statut de supporter premium</div>
+                            <div class="benefit">💬 Badge visible sur tous vos contenus</div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="clubs-grid-web">
-                    <div class="club-card-web" onclick="selectBadgeWeb('real-sociedad')">
-                        <div class="club-header-web">
-                            <img src="./logos/real-sociedad.png" alt="Real Sociedad" class="club-logo-web">
-                            <div class="club-info-web">
-                                <h3>Real Sociedad</h3>
-                                <div class="club-tier-web">Standard</div>
+                <div class="clubs-section">
+                    <h3>Choisissez votre club</h3>
+                    <div class="clubs-grid">
+                        <div class="club-option" onclick="selectBadge('real-sociedad')">
+                            <img src="./logos/real-sociedad.png" alt="Real Sociedad" class="club-logo">
+                            <div class="club-info">
+                                <h4>Real Sociedad</h4>
+                                <p class="price">4.99€<span>/mois</span></p>
+                                <div class="tier standard">Standard</div>
                             </div>
                         </div>
-                        <div class="club-pricing-web">
-                            <div class="club-price-web">4.99€/mois</div>
-                            <button class="club-select-btn">Sélectionner</button>
-                        </div>
-                    </div>
-                    
-                    <div class="club-card-web" onclick="selectBadgeWeb('arsenal')">
-                        <div class="club-header-web">
-                            <img src="./logos/arsenal.png" alt="Arsenal FC" class="club-logo-web">
-                            <div class="club-info-web">
-                                <h3>Arsenal FC</h3>
-                                <div class="club-tier-web">Premium</div>
+                        
+                        <div class="club-option" onclick="selectBadge('arsenal')">
+                            <img src="./logos/arsenal.png" alt="Arsenal FC" class="club-logo">
+                            <div class="club-info">
+                                <h4>Arsenal FC</h4>
+                                <p class="price">9.99€<span>/mois</span></p>
+                                <div class="tier premium">Premium</div>
                             </div>
                         </div>
-                        <div class="club-pricing-web">
-                            <div class="club-price-web">9.99€/mois</div>
-                            <button class="club-select-btn">Sélectionner</button>
-                        </div>
-                    </div>
-                    
-                    <div class="club-card-web" onclick="selectBadgeWeb('barcelona')">
-                        <div class="club-header-web">
-                            <img src="./logos/barcelona.png" alt="FC Barcelona" class="club-logo-web">
-                            <div class="club-info-web">
-                                <h3>FC Barcelona</h3>
-                                <div class="club-tier-web">Légende</div>
+                        
+                        <div class="club-option" onclick="selectBadge('barcelona')">
+                            <img src="./logos/barcelona.png" alt="FC Barcelona" class="club-logo">
+                            <div class="club-info">
+                                <h4>FC Barcelona</h4>
+                                <p class="price">19.99€<span>/mois</span></p>
+                                <div class="tier legend">Légende</div>
                             </div>
                         </div>
-                        <div class="club-pricing-web">
-                            <div class="club-price-web">19.99€/mois</div>
-                            <button class="club-select-btn">Sélectionner</button>
-                        </div>
-                    </div>
-                    
-                    <div class="club-card-web" onclick="selectBadgeWeb('psg')">
-                        <div class="club-header-web">
-                            <img src="./logos/psg.png" alt="Paris Saint-Germain" class="club-logo-web">
-                            <div class="club-info-web">
-                                <h3>Paris SG</h3>
-                                <div class="club-tier-web">Légende</div>
+                        
+                        <div class="club-option" onclick="selectBadge('psg')">
+                            <img src="./logos/psg.png" alt="Paris Saint-Germain" class="club-logo">
+                            <div class="club-info">
+                                <h4>Paris SG</h4>
+                                <p class="price">19.99€<span>/mois</span></p>
+                                <div class="tier legend">Légende</div>
                             </div>
                         </div>
-                        <div class="club-pricing-web">
-                            <div class="club-price-web">19.99€/mois</div>
-                            <button class="club-select-btn">Sélectionner</button>
-                        </div>
-                    </div>
-                    
-                    <div class="club-card-web" onclick="selectBadgeWeb('man-city')">
-                        <div class="club-header-web">
-                            <img src="./logos/man-city.png" alt="Manchester City" class="club-logo-web">
-                            <div class="club-info-web">
-                                <h3>Manchester City</h3>
-                                <div class="club-tier-web">Premium</div>
+                        
+                        <div class="club-option" onclick="selectBadge('man-city')">
+                            <img src="./logos/man-city.png" alt="Manchester City" class="club-logo">
+                            <div class="club-info">
+                                <h4>Manchester City</h4>
+                                <p class="price">9.99€<span>/mois</span></p>
+                                <div class="tier premium">Premium</div>
                             </div>
                         </div>
-                        <div class="club-pricing-web">
-                            <div class="club-price-web">9.99€/mois</div>
-                            <button class="club-select-btn">Sélectionner</button>
-                        </div>
-                    </div>
-                    
-                    <div class="club-card-web" onclick="selectBadgeWeb('juventus')">
-                        <div class="club-header-web">
-                            <img src="./logos/juventus.png" alt="Juventus FC" class="club-logo-web">
-                            <div class="club-info-web">
-                                <h3>Juventus FC</h3>
-                                <div class="club-tier-web">Premium</div>
+                        
+                        <div class="club-option" onclick="selectBadge('juventus')">
+                            <img src="./logos/juventus.png" alt="Juventus FC" class="club-logo">
+                            <div class="club-info">
+                                <h4>Juventus FC</h4>
+                                <p class="price">9.99€<span>/mois</span></p>
+                                <div class="tier premium">Premium</div>
                             </div>
-                        </div>
-                        <div class="club-pricing-web">
-                            <div class="club-price-web">9.99€/mois</div>
-                            <button class="club-select-btn">Sélectionner</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Section d'achat fixe en bas -->
-            <div class="purchase-section-web" id="purchase-section-web">
-                <div class="purchase-content-web">
-                    <div class="selected-club-web" id="selected-club-web">
-                        <img id="selected-logo-web" src="" alt="" class="selected-logo-web">
-                        <div class="selected-details-web">
-                            <h3 id="selected-name-web"></h3>
-                            <p id="selected-price-web"></p>
+        </div>
+
+        <!-- Purchase Panel -->
+        <div class="purchase-panel" id="purchase-panel" style="display: none;">
+            <div class="purchase-content">
+                <div class="selected-club-info">
+                    <img id="selected-logo" src="" alt="" class="selected-logo">
+                    <div class="selected-details">
+                        <h4 id="selected-name"></h4>
+                        <p id="selected-price"></p>
+                        <div class="features">
+                            <span>✓ Badge officiel</span>
+                            <span>✓ Statut vérifié</span>
+                            <span>✓ Design exclusif</span>
                         </div>
                     </div>
-                    <button class="purchase-btn-web" onclick="simulatePurchaseWeb()">Activer Badge</button>
                 </div>
+                <button class="purchase-btn" onclick="simulatePurchase()">
+                    <span class="btn-text">Activer Badge</span>
+                    <span class="btn-icon">🏆</span>
+                </button>
+                <p class="disclaimer">* Version prototype - Aucun paiement réel ne sera effectué</p>
             </div>
         </div>
     </div>
 
     <!-- SUCCESS MODAL -->
     <div id="success-modal" class="modal" style="display: none;">
+        <div class="modal-overlay" onclick="closeModal()"></div>
         <div class="modal-content">
-            <h2>🎉 Badge Activé !</h2>
-            <p>Votre badge <span id="activated-club"></span> est maintenant actif.</p>
-            <button onclick="closeModal()">Voir mon profil</button>
+            <div class="success-animation">🎉</div>
+            <h2>Badge Activé avec Succès !</h2>
+            <p>Votre badge <strong id="activated-club"></strong> est maintenant actif et visible sur votre profil.</p>
+            <div class="modal-actions">
+                <button class="primary-btn" onclick="closeModal()">Voir mon profil</button>
+                <button class="secondary-btn" onclick="closeModal()">Parfait !</button>
+            </div>
         </div>
     </div>
 
@@ -336,96 +391,93 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: #000;
-            min-height: 100vh;
-            margin: 0;
-            color: white;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
         .page {
             display: none;
-            width: 100%;
             min-height: 100vh;
         }
         
         .page.active {
             display: block;
         }
+
+        /* ================ LOGIN PAGE ================ */
+        #login-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
         
-        /* LOGIN PAGE */
         .login-container {
             background: white;
             border-radius: 20px;
-            padding: 40px 30px;
+            padding: 60px 40px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 400px;
-            margin: 50px auto;
-            position: relative;
-            z-index: 10;
-        }
-        
-        #login-page {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            max-width: 450px;
+            width: 100%;
         }
         
         .logo-section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         
         .tiktok-logo {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .logo-section h1 {
             color: #333;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
         
         .subtitle {
             color: #666;
-            font-size: 16px;
+            font-size: 18px;
         }
         
         .login-form h2 {
             color: #333;
-            font-size: 24px;
-            margin-bottom: 30px;
+            font-size: 28px;
+            margin-bottom: 40px;
         }
         
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .input-group input {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             border: 2px solid #f0f0f0;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
         
         .input-group input:focus {
             border-color: #25F4EE;
+            box-shadow: 0 0 0 3px rgba(37, 244, 238, 0.1);
         }
         
         .login-btn {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: linear-gradient(45deg, #FE2C55, #25F4EE);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
@@ -435,243 +487,178 @@
         .login-btn:hover {
             transform: translateY(-2px);
         }
-        
-        /* PHONE MOCKUP - REMPLACÉ PAR WEB INTERFACE */
-        .tiktok-web-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #000;
-            min-height: 100vh;
-        }
-        
-        /* HEADER TIKTOK WEB */
+
+        /* ================ HEADER ================ */
         .tiktok-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 24px;
-            border-bottom: 1px solid #333;
+            padding: 20px 40px;
             background: #000;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        .tiktok-logo-header {
+        .header-left {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
         
-        .tiktok-logo-header h1 {
+        .header-left h1 {
             font-size: 24px;
             font-weight: 700;
-            color: white;
+            color: #fff;
         }
         
-        .search-bar {
-            flex: 1;
-            max-width: 400px;
-            margin: 0 40px;
-            position: relative;
-        }
-        
-        .search-bar input {
-            width: 100%;
-            padding: 12px 16px;
-            background: #1618230F;
-            border: 1px solid #333;
-            border-radius: 92px;
-            color: white;
-            font-size: 16px;
-            outline: none;
-        }
-        
-        .search-bar input::placeholder {
-            color: #888;
-        }
-        
-        .user-actions {
+        .header-right {
             display: flex;
-            align-items: center;
-            gap: 24px;
+            gap: 15px;
         }
         
-        .upload-btn-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: #1618230F;
-            border: 1px solid #333;
-            border-radius: 2px;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .profile-menu {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+        .header-btn, .back-btn {
             background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        /* TIKTOK WEB INTERFACE */
-        .tiktok-web-profile {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 32px 24px;
-        }
-        
-        .profile-info-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-        
-        .profile-avatar-large {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 2px solid #333;
-        }
-        
-        .profile-details {
-            flex: 1;
-        }
-        
-        .username-badge-web {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        
-        .username-large {
-            font-size: 32px;
-            font-weight: 700;
-            color: white;
-        }
-        
-        .club-badge-web {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #FFD700;
-            box-shadow: 0 2px 8px rgba(255,215,0,0.3);
-            animation: badgePulse 2s infinite;
-        }
-        
-        .stats-web {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 24px;
-        }
-        
-        .stat-web {
-            text-align: left;
-        }
-        
-        .stat-number-web {
-            font-size: 20px;
-            font-weight: 700;
-            color: white;
-        }
-        
-        .stat-label-web {
-            font-size: 14px;
-            color: #888;
-            margin-top: 4px;
-        }
-        
-        .profile-actions-web {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .follow-btn-web, .message-btn-web, .settings-btn-web {
-            padding: 10px 24px;
-            border: 1px solid #333;
-            border-radius: 2px;
-            background: transparent;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .settings-btn-web {
-            background: #FE2C55;
-            border-color: #FE2C55;
-        }
-        
-        .follow-btn-web:hover {
-            background: #333;
-        }
-        
-        .content-tabs-web {
-            display: flex;
-            border-bottom: 1px solid #333;
-            margin-bottom: 32px;
-        }
-        
-        .tab-web {
-            padding: 16px 24px;
-            color: #888;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            font-size: 16px;
-            font-weight: 600;
-        }
-        
-        .tab-web.active {
-            color: white;
-            border-bottom-color: white;
-        }
-        
-        .videos-grid-web {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-        }
-        
-        .video-placeholder-web {
-            aspect-ratio: 9/16;
-            background: #1A1A1A;
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
             border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        
+        .back-btn {
+            width: auto;
+            padding: 10px 15px;
+            border-radius: 20px;
+        }
+        
+        .header-btn:hover, .back-btn:hover {
+            background: #555;
+        }
+
+        /* ================ MAIN CONTENT ================ */
+        .main-content {
+            display: flex;
+            min-height: calc(100vh - 81px);
+        }
+
+        /* ================ SIDEBAR ================ */
+        .sidebar {
+            width: 280px;
+            background: #111;
+            padding: 30px 20px;
+            border-right: 1px solid #333;
+            overflow-y: auto;
+        }
+        
+        .nav-section {
+            margin-bottom: 40px;
+        }
+        
+        .nav-section-title {
+            color: #666;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-bottom: 5px;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: #222;
+            color: #fff;
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+        }
+        
+        .nav-icon {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .nav-label {
+            font-weight: 500;
+        }
+        
+        .suggested-account {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .suggested-account:hover {
+            background: #222;
+        }
+        
+        .account-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+        
+        .account-info {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            text-align: center;
-            padding: 20px;
         }
         
-        .video-placeholder-web .icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+        .account-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #fff;
+        }
+        
+        .account-followers {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* ================ PROFILE CONTENT ================ */
+        .profile-content {
+            flex: 1;
+            padding: 40px;
+            max-width: 900px;
         }
         
         .connection-warning {
-            background: #333;
-            margin: 10px 20px;
-            padding: 15px;
+            background: #1a1a2e;
+            color: #16a085;
+            padding: 15px 20px;
             border-radius: 10px;
+            margin-bottom: 30px;
             text-align: center;
-            font-size: 14px;
-            color: #ccc;
+            border: 1px solid #16a085;
         }
         
         .profile-header {
+            margin-bottom: 40px;
+        }
+        
+        .profile-info {
             display: flex;
-            justify-content: center;
-            margin: 20px 0;
+            gap: 40px;
+            align-items: flex-start;
         }
         
         .avatar-container {
@@ -679,47 +666,35 @@
         }
         
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
+            border: 3px solid #333;
         }
         
-        .plus-icon {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background: #25F4EE;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: bold;
+        .profile-details {
+            flex: 1;
         }
         
         .username-container {
-            text-align: center;
-            margin: 15px 0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
         
         .username {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
         }
         
         .club-badge {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: 2px solid #FFD700;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
             animation: badgePulse 2s infinite;
         }
         
@@ -730,18 +705,18 @@
         
         .stats-container {
             display: flex;
-            justify-content: center;
             gap: 40px;
-            margin: 25px 0;
+            margin-bottom: 25px;
         }
         
         .stat {
-            text-align: center;
+            text-align: left;
         }
         
         .stat-number {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
+            color: #fff;
         }
         
         .stat-label {
@@ -752,184 +727,195 @@
         
         .action-buttons {
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 20px;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
         .edit-profile-btn {
-            flex: 1;
-            background: #333;
+            background: #FE2C55;
             color: white;
-            border: 1px solid #555;
-            padding: 10px;
+            border: none;
+            padding: 12px 24px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
         }
         
-        .settings-btn, .add-friend-btn {
+        .edit-profile-btn:hover {
+            background: #e02847;
+        }
+        
+        .share-btn, .more-btn {
             background: #333;
             color: white;
-            border: 1px solid #555;
-            padding: 10px 12px;
+            border: none;
+            padding: 12px 20px;
             border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
+            transition: background 0.2s;
         }
         
-        .emoji-section {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 18px;
+        .share-btn:hover, .more-btn:hover {
+            background: #555;
         }
         
-        .tab-bar {
+        .bio-section {
+            margin-top: 20px;
+        }
+        
+        .bio {
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .content-tabs {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            padding: 0 20px;
+            gap: 0;
+            margin: 40px 0 30px 0;
+            border-bottom: 1px solid #333;
         }
         
         .tab {
-            padding: 8px 0;
-            border-bottom: 2px solid transparent;
+            padding: 15px 25px;
             cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover, .tab.active {
+            color: #fff;
         }
         
         .tab.active {
-            border-bottom-color: white;
+            border-bottom-color: #FE2C55;
+        }
+        
+        .content-grid {
+            margin-top: 40px;
         }
         
         .content-placeholder {
             text-align: center;
-            padding: 40px 20px;
+            padding: 80px 40px;
             color: #666;
         }
         
         .placeholder-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 64px;
+            margin-bottom: 25px;
+        }
+        
+        .content-placeholder h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .content-placeholder p {
+            font-size: 16px;
+            margin-bottom: 30px;
         }
         
         .upload-btn {
-            background: #FE2C55;
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 15px 30px;
             border-radius: 25px;
             font-size: 16px;
             font-weight: 600;
-            margin-top: 15px;
-        }
-        
-        /* BOTTOM NAVIGATION */
-        .bottom-nav {
-            display: flex;
-            background: #000;
-            padding: 10px 0;
-            border-top: 1px solid #333;
-        }
-        
-        .nav-item {
-            flex: 1;
-            text-align: center;
-            color: #666;
-            font-size: 12px;
             cursor: pointer;
+            transition: transform 0.2s;
         }
         
-        .nav-item.active {
-            color: white;
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ================ SETTINGS PAGE ================ */
+        .settings-container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .plus-nav {
-            background: white;
-            color: black;
-            width: 32px;
-            height: 24px;
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
         }
         
-        .inbox {
-            position: relative;
+        .settings-column {
+            background: #111;
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #333;
         }
         
-        .notification {
-            background: #FE2C55;
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            position: absolute;
-            top: -5px;
-            right: -5px;
-        }
-        
-        /* SETTINGS INTERFACE */
-        .settings-interface {
-            background: #f8f8f8;
-            min-height: 600px;
-            color: #333;
-        }
-        
-        .settings-header {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            background: white;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .back-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #333;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-        
-        .settings-header h2 {
-            font-size: 18px;
-            font-weight: 600;
+        .settings-section-title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
         }
         
         .settings-list {
-            background: white;
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
         
         .settings-item {
             display: flex;
             align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 20px;
+            border-radius: 12px;
             cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.02);
         }
         
         .settings-item:hover {
-            background: #f8f8f8;
+            background: rgba(255,255,255,0.05);
+            transform: translateX(5px);
         }
         
         .settings-item .icon {
-            width: 24px;
-            margin-right: 15px;
-            font-size: 18px;
+            font-size: 24px;
+            margin-right: 20px;
+            width: 30px;
+            text-align: center;
         }
         
-        .settings-item .label {
+        .setting-info {
             flex: 1;
+        }
+        
+        .setting-info .label {
+            display: block;
             font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .setting-info .description {
+            font-size: 14px;
+            color: #666;
         }
         
         .settings-item .arrow {
-            color: #999;
-            font-size: 18px;
+            color: #666;
+            font-size: 20px;
+            margin-left: 15px;
         }
         
         .notification-dot {
@@ -937,209 +923,439 @@
             height: 8px;
             background: #FE2C55;
             border-radius: 50%;
-            margin-right: 10px;
+            margin-left: 10px;
+            margin-right: 15px;
         }
         
-        .section-divider {
-            padding: 15px 20px;
-            font-size: 14px;
-            color: #666;
-            background: #f8f8f8;
-            font-weight: 600;
-        }
-        
-        /* BADGE SECTION HIGHLIGHT */
+        /* Badge Section Highlight */
         .badge-section {
-            background: linear-gradient(90deg, #fff5f5, #ffffff) !important;
-            border-left: 4px solid #FE2C55;
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.1)) !important;
+            border: 2px solid rgba(254, 44, 85, 0.3) !important;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .badge-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+        }
+        
+        .badge-preview-container {
+            margin-top: 10px;
         }
         
         .badge-preview {
-            width: 20px;
-            height: 20px;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            border: 1px solid #ddd;
-            margin-right: 10px;
+            border: 2px solid #ddd;
+        }
+
+        /* ================ BADGE SELECTION PAGE ================ */
+        .badge-selection-container {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        /* BADGE SELECTION */
-        .badge-selection-interface {
-            background: #f8f8f8;
-            min-height: 600px;
+        .badge-intro {
+            margin-bottom: 50px;
         }
         
-        .badge-info {
-            padding: 20px;
-            background: white;
-            margin: 10px 20px;
-            border-radius: 10px;
+        .intro-card {
+            background: linear-gradient(135deg, #111, #1a1a2e);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid #333;
             text-align: center;
+        }
+        
+        .intro-card h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .intro-card p {
+            font-size: 18px;
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .benefit {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
             font-size: 14px;
-            color: #666;
+            color: #fff;
+            text-align: left;
+        }
+        
+        .clubs-section h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-align: center;
         }
         
         .clubs-grid {
-            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
         
         .club-option {
-            display: flex;
-            align-items: center;
-            background: white;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 12px;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 25px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
         
         .club-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: #555;
+        }
+        
+        .club-option.selected {
+            border-color: #FE2C55;
+            background: linear-gradient(135deg, rgba(254, 44, 85, 0.1), rgba(37, 244, 238, 0.1));
         }
         
         .club-logo {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #f0f0f0;
+            border: 3px solid #333;
         }
         
-        .club-info h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: #333;
+        .club-info h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #fff;
         }
         
         .price {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 700;
             color: #FE2C55;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: #666;
         }
         
         .tier {
-            font-size: 12px;
-            color: #666;
-            background: #f0f0f0;
-            padding: 2px 8px;
-            border-radius: 10px;
             display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
-        .purchase-section {
+        .tier.standard {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .tier.premium {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .tier.legend {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+        }
+        
+        /* Purchase Panel */
+        .purchase-panel {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
-            padding: 20px;
-            border-top: 1px solid #eee;
-            box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #111, #000);
+            border-top: 2px solid #333;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
         }
         
-        .selected-club {
+        .purchase-panel.show {
+            transform: translateY(0);
+        }
+        
+        .purchase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 40px;
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .selected-club-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
         }
         
         .selected-logo {
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #FFD700;
+            border: 3px solid #FFD700;
+        }
+        
+        .selected-details h4 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .selected-details p {
+            font-size: 18px;
+            color: #FE2C55;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .features {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .features span {
+            font-size: 12px;
+            color: #666;
         }
         
         .purchase-btn {
-            width: 100%;
             background: linear-gradient(45deg, #FE2C55, #25F4EE);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 15px 30px;
+            border-radius: 12px;
             font-size: 18px;
             font-weight: 600;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .purchase-btn:hover {
+            transform: translateY(-2px);
         }
         
         .disclaimer {
-            text-align: center;
             font-size: 12px;
-            color: #999;
-            margin-top: 10px;
+            color: #666;
+            margin-left: 20px;
         }
-        
-        /* MODAL */
+
+        /* ================ MODAL ================ */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
+            z-index: 2000;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+        }
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
         }
         
         .modal-content {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #111, #1a1a2e);
+            padding: 50px 40px;
+            border-radius: 25px;
             text-align: center;
-            max-width: 300px;
+            max-width: 450px;
             margin: 20px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid #333;
+        }
+        
+        .success-animation {
+            font-size: 64px;
+            margin-bottom: 25px;
+            animation: celebrationBounce 1s ease-in-out;
+        }
+        
+        @keyframes celebrationBounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            80% { transform: translateY(-10px); }
         }
         
         .modal-content h2 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 28px;
         }
         
         .modal-content p {
-            color: #666;
-            margin-bottom: 25px;
+            color: #ccc;
+            margin-bottom: 35px;
             font-size: 16px;
+            line-height: 1.5;
         }
         
-        .modal-content button {
-            background: linear-gradient(45deg, #FE2C55, #25F4EE);
-            color: white;
-            border: none;
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .primary-btn, .secondary-btn {
             padding: 12px 25px;
             border-radius: 25px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            transition: transform 0.2s;
         }
         
-        /* RESPONSIVE */
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
+        .primary-btn {
+            background: linear-gradient(45deg, #FE2C55, #25F4EE);
+            color: white;
+            border: none;
+        }
+        
+        .secondary-btn {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #333;
+        }
+        
+        .primary-btn:hover, .secondary-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ================ RESPONSIVE ================ */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
             }
             
-            .phone-mockup {
-                border-radius: 15px;
-                padding: 4px;
+            .profile-content, .settings-container, .badge-selection-container {
+                padding: 30px;
             }
             
-            .login-container {
-                padding: 30px 20px;
+            .tiktok-header {
+                padding: 15px 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+            }
+            
+            .nav-label, .nav-section-title {
+                display: none;
+            }
+            
+            .suggested-account {
+                justify-content: center;
+            }
+            
+            .account-info {
+                display: none;
+            }
+            
+            .profile-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .stats-container {
+                justify-content: center;
+            }
+            
+            .settings-grid {
+                grid-template-columns: 1fr;
             }
             
             .clubs-grid {
-                padding: 0 10px;
+                grid-template-columns: 1fr;
             }
             
-            .purchase-section {
-                padding: 15px;
+            .purchase-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .tiktok-header {
+                padding: 15px 20px;
+            }
+            
+            .profile-content, .settings-container, .badge-selection-container {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                display: block;
+            }
+            
+            .login-container {
+                padding: 40px 25px;
+            }
+            
+            .modal-content {
+                padding: 40px 25px;
             }
         }
     </style>
@@ -1189,121 +1405,45 @@
             }
         };
         
+        // Fonctions de navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+        
         function login() {
-            alert('Fonction login appelée !'); // Debug
-            
-            // Récupérer les valeurs
             const firstName = document.getElementById('firstName').value.trim();
             const lastName = document.getElementById('lastName').value.trim();
-            
-            alert(`Données: ${firstName} ${lastName}`); // Debug
             
             if (!firstName || !lastName) {
                 alert('Veuillez remplir tous les champs');
                 return;
             }
             
-            // Navigation simple
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById('profile-page').classList.add('active');
+            currentUser = {
+                firstName: firstName,
+                lastName: lastName,
+                badge: null
+            };
             
-            alert('Navigation vers profil effectuée !'); // Debug
-        }
-        
-        function showUserBadgeWeb(clubId) {
-            const badgeElement = document.getElementById('profile-badge-web');
-            const club = clubs[clubId];
-            
-            if (club) {
-                badgeElement.src = club.logo;
-                badgeElement.alt = `Badge ${club.name}`;
-                badgeElement.title = `Supporter Officiel ${club.name}`;
-                badgeElement.style.display = 'inline-block';
-            }
-        }
-        
-        function showSettings() {
-            // Mettre à jour l'aperçu du badge actuel
-            const currentBadge = localStorage.getItem('userBadge');
-            const preview = document.getElementById('current-badge-preview-web');
-            
-            if (currentBadge && clubs[currentBadge]) {
-                preview.innerHTML = `<img src="${clubs[currentBadge].logo}" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #666;">`;
-            } else {
-                preview.innerHTML = '<span style="color: #666; font-size: 12px;">Aucun</span>';
+            // Simuler la récupération du badge depuis le stockage local (en production ce serait depuis une API)
+            const savedBadge = localStorage.getItem('userBadge');
+            if (savedBadge) {
+                currentUser.badge = savedBadge;
             }
             
-            showPage('settings-page');
-        }
-        
-        function selectBadgeWeb(clubId) {
-            selectedBadge = clubId;
-            const club = clubs[clubId];
+            // Mettre à jour le nom d'utilisateur
+            const username = `@${firstName.toLowerCase()}${lastName.toLowerCase()}`;
+            document.getElementById('display-username').textContent = username;
             
-            // Réinitialiser tous les cards
-            document.querySelectorAll('.club-card-web').forEach(card => {
-                card.classList.remove('selected');
-                card.querySelector('.club-select-btn').textContent = 'Sélectionner';
-            });
+            // Afficher le badge s'il existe
+            if (currentUser.badge) {
+                showUserBadge(currentUser.badge);
+            }
             
-            // Sélectionner le card actuel
-            event.currentTarget.classList.add('selected');
-            event.currentTarget.querySelector('.club-select-btn').textContent = 'Sélectionné';
-            
-            // Mettre à jour la section d'achat
-            document.getElementById('selected-logo-web').src = club.logo;
-            document.getElementById('selected-logo-web').alt = club.name;
-            document.getElementById('selected-name-web').textContent = club.name;
-            document.getElementById('selected-price-web').textContent = club.price;
-            
-            // Afficher la section d'achat
-            document.getElementById('purchase-section-web').style.display = 'block';
-        }
-        
-        function simulatePurchaseWeb() {
-            if (!selectedBadge) return;
-            
-            // Simuler un délai de traitement
-            const purchaseBtn = document.querySelector('.purchase-btn-web');
-            purchaseBtn.textContent = 'Traitement...';
-            purchaseBtn.disabled = true;
-            
-            setTimeout(() => {
-                // Sauvegarder le badge
-                localStorage.setItem('userBadge', selectedBadge);
-                currentUser.badge = selectedBadge;
-                
-                // Afficher le modal de succès
-                document.getElementById('activated-club').textContent = clubs[selectedBadge].name;
-                document.getElementById('success-modal').style.display = 'flex';
-                
-                // Réinitialiser le bouton
-                purchaseBtn.textContent = 'Activer Badge';
-                purchaseBtn.disabled = false;
-                
-            }, 2000);
-        }
-        
-        function closeModal() {
-            document.getElementById('success-modal').style.display = 'none';
-            
-            // Mettre à jour le badge sur le profil
-            showUserBadgeWeb(selectedBadge);
-            
-            // Retourner au profil
             showPage('profile-page');
-            
-            // Réinitialiser la sélection
-            selectedBadge = null;
-            document.getElementById('purchase-section-web').style.display = 'none';
-            
-            // Créer un effet de célébration
-            setTimeout(() => {
-                const badge = document.getElementById('profile-badge-web');
-                badge.style.animation = 'badgePulse 1s ease-in-out 3';
-            }, 500);
         }
         
         function showProfile() {
@@ -1316,9 +1456,9 @@
             const preview = document.getElementById('current-badge-preview');
             
             if (currentBadge && clubs[currentBadge]) {
-                preview.innerHTML = `<img src="${clubs[currentBadge].logo}" style="width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ddd;">`;
+                preview.innerHTML = `<img src="${clubs[currentBadge].logo}" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #FFD700;">`;
             } else {
-                preview.innerHTML = '<span style="color: #999; font-size: 12px;">Aucun</span>';
+                preview.innerHTML = '<span style="color: #666; font-size: 12px;">Aucun badge</span>';
             }
             
             showPage('settings-page');
@@ -1328,228 +1468,166 @@
             showPage('badge-selection-page');
         }
         
-        
-        // Initialisation au chargement
-        window.onload = function() {
-            console.log('Application initialisée');
+        function selectBadge(clubId) {
+            selectedBadge = clubId;
+            const club = clubs[clubId];
             
-            // Vérifier s'il y a un utilisateur sauvegardé
-            const savedBadge = localStorage.getItem('userBadge');
-            if (savedBadge) {
-                // Pour la démo, on peut pré-remplir les champs
-                document.getElementById('firstName').value = 'Demo';
-                document.getElementById('lastName').value = 'User';
-                console.log('Champs pré-remplis pour la démo');
-            }
-            
-            // Ajouter événement Enter sur les champs de connexion
-            const firstNameInput = document.getElementById('firstName');
-            const lastNameInput = document.getElementById('lastName');
-            
-            if (firstNameInput && lastNameInput) {
-                firstNameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        lastNameInput.focus();
-                    }
-                });
-                
-                lastNameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        login();
-                    }
-                });
-                
-                console.log('Événements clavier ajoutés');
-            }
-            
-            // Ajouter des événements pour les images qui ne se chargent pas
-            document.querySelectorAll('img[src^="./logos/"]').forEach(img => {
-                img.onerror = function() {
-                    // Remplacer par un placeholder coloré
-                    const canvas = document.createElement('canvas');
-                    canvas.width = 50;
-                    canvas.height = 50;
-                    const ctx = canvas.getContext('2d');
-                    
-                    // Couleur basée sur le nom du club
-                    const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'];
-                    const colorIndex = Array.from(img.src).reduce((a, b) => a + b.charCodeAt(0), 0) % colors.length;
-                    
-                    ctx.fillStyle = colors[colorIndex];
-                    ctx.fillRect(0, 0, 50, 50);
-                    
-                    // Ajouter les initiales du club
-                    const clubName = img.alt || 'FC';
-                    const initials = clubName.split(' ').map(word => word[0]).join('').substring(0, 2);
-                    
-                    ctx.fillStyle = 'white';
-                    ctx.font = 'bold 16px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(initials, 25, 25);
-                    
-                    img.src = canvas.toDataURL();
-                    img.style.borderRadius = '50%';
-                    
-                    console.log('Placeholder créé pour:', clubName);
-                };
+            // Réinitialiser la sélection visuelle
+            document.querySelectorAll('.club-option').forEach(option => {
+                option.classList.remove('selected');
             });
-        };
-        
-        // Raccourcis clavier pour la démo
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
             
-            // Navigation rapide pour la démo
-            if (e.ctrlKey || e.metaKey) {
-                switch(e.key) {
-                    case '1':
-                        e.preventDefault();
-                        showPage('login-page');
-                        break;
-                    case '2':
-                        e.preventDefault();
-                        showPage('profile-page');
-                        break;
-                    case '3':
-                        e.preventDefault();
-                        showPage('settings-page');
-                        break;
-                    case '4':
-                        e.preventDefault();
-                        showPage('badge-selection-page');
-                        break;
-                }
-            }
-        });
+            // Marquer le club sélectionné
+            event.currentTarget.classList.add('selected');
+            
+            // Mettre à jour le panneau d'achat
+            document.getElementById('selected-logo').src = club.logo;
+            document.getElementById('selected-logo').alt = club.name;
+            document.getElementById('selected-name').textContent = club.name;
+            document.getElementById('selected-price').textContent = club.price;
+            
+            // Afficher le panneau d'achat avec animation
+            const panel = document.getElementById('purchase-panel');
+            panel.style.display = 'block';
+            setTimeout(() => {
+                panel.classList.add('show');
+            }, 100);
+        }
+        
+        function simulatePurchase() {
             if (!selectedBadge) return;
             
-            // Simuler un délai de traitement
+            // Animation du bouton de traitement
             const purchaseBtn = document.querySelector('.purchase-btn');
-            purchaseBtn.textContent = 'Traitement...';
+            const originalText = purchaseBtn.innerHTML;
+            purchaseBtn.innerHTML = '<span class="btn-text">Traitement...</span><span class="btn-icon">⏳</span>';
             purchaseBtn.disabled = true;
             
             setTimeout(() => {
                 // Sauvegarder le badge
                 localStorage.setItem('userBadge', selectedBadge);
-                currentUser.badge = selectedBadge;
+                if (currentUser) {
+                    currentUser.badge = selectedBadge;
+                }
                 
                 // Afficher le modal de succès
                 document.getElementById('activated-club').textContent = clubs[selectedBadge].name;
                 document.getElementById('success-modal').style.display = 'flex';
                 
                 // Réinitialiser le bouton
-                purchaseBtn.textContent = 'Activer Badge';
+                purchaseBtn.innerHTML = originalText;
                 purchaseBtn.disabled = false;
+                
+                // Masquer le panneau d'achat
+                const panel = document.getElementById('purchase-panel');
+                panel.classList.remove('show');
+                setTimeout(() => {
+                    panel.style.display = 'none';
+                }, 300);
                 
             }, 2000);
         }
         
         function showUserBadge(clubId) {
-            // Fonction legacy - maintenant redirigée vers la version web
-            showUserBadgeWeb(clubId);
-        }
-        
-        function selectBadge(clubId) {
-            // Fonction legacy - maintenant redirigée vers la version web
-            selectBadgeWeb(clubId);
-        }
-        
-        function simulatePurchase() {
-            // Fonction legacy - maintenant redirigée vers la version web
-            simulatePurchaseWeb();
+            const badgeElement = document.getElementById('profile-badge');
+            const club = clubs[clubId];
+            
+            if (club) {
+                badgeElement.src = club.logo;
+                badgeElement.alt = `Badge ${club.name}`;
+                badgeElement.title = `Supporter Officiel ${club.name}`;
+                badgeElement.style.display = 'inline-block';
+            }
         }
         
         function closeModal() {
             document.getElementById('success-modal').style.display = 'none';
             
             // Mettre à jour le badge sur le profil
-            showUserBadge(selectedBadge);
+            if (selectedBadge) {
+                showUserBadge(selectedBadge);
+            }
             
             // Retourner au profil
             showPage('profile-page');
             
             // Réinitialiser la sélection
             selectedBadge = null;
-            document.getElementById('purchase-section').style.display = 'none';
+            document.querySelectorAll('.club-option').forEach(option => {
+                option.classList.remove('selected');
+            });
             
-            // Créer un effet de célébration
+            // Effet de célébration du badge
             setTimeout(() => {
                 const badge = document.getElementById('profile-badge');
-                badge.style.animation = 'badgePulse 1s ease-in-out 3';
+                if (badge && badge.style.display !== 'none') {
+                    badge.style.animation = 'badgePulse 1s ease-in-out 3';
+                }
             }, 500);
         }
         
         // Initialisation au chargement
         window.onload = function() {
-            // Vérifier s'il y a un utilisateur sauvegardé
-            const savedBadge = localStorage.getItem('userBadge');
-            if (savedBadge) {
-                // Pour la démo, on peut pré-remplir les champs
-                document.getElementById('firstName').value = 'Demo';
-                document.getElementById('lastName').value = 'User';
-            }
-            
-            // Ajouter des événements pour les images qui ne se chargent pas
+            // Gérer les images qui ne se chargent pas
             document.querySelectorAll('img[src^="./logos/"]').forEach(img => {
                 img.onerror = function() {
                     // Remplacer par un placeholder coloré
                     const canvas = document.createElement('canvas');
-                    canvas.width = 50;
-                    canvas.height = 50;
+                    canvas.width = 60;
+                    canvas.height = 60;
                     const ctx = canvas.getContext('2d');
                     
-                    // Couleur basée sur le nom du club
+                    // Couleurs basées sur le nom du club
                     const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD'];
                     const colorIndex = Array.from(img.src).reduce((a, b) => a + b.charCodeAt(0), 0) % colors.length;
                     
                     ctx.fillStyle = colors[colorIndex];
-                    ctx.fillRect(0, 0, 50, 50);
+                    ctx.fillRect(0, 0, 60, 60);
                     
                     // Ajouter les initiales du club
                     const clubName = img.alt || 'FC';
                     const initials = clubName.split(' ').map(word => word[0]).join('').substring(0, 2);
                     
                     ctx.fillStyle = 'white';
-                    ctx.font = 'bold 16px Arial';
+                    ctx.font = 'bold 20px Arial';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(initials, 25, 25);
+                    ctx.fillText(initials, 30, 30);
                     
                     img.src = canvas.toDataURL();
                     img.style.borderRadius = '50%';
                 };
             });
+            
+            // Vérifier s'il y a un badge sauvegardé pour pré-remplir la démo
+            const savedBadge = localStorage.getItem('userBadge');
+            if (savedBadge) {
+                document.getElementById('firstName').value = 'Demo';
+                document.getElementById('lastName').value = 'User';
+            }
         };
         
-        // Raccourcis clavier pour la démo
+        // Raccourcis clavier pour la navigation (dev)
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
-            
-            // Navigation rapide pour la démo
-            if (e.ctrlKey || e.metaKey) {
-                switch(e.key) {
-                    case '1':
-                        e.preventDefault();
-                        showPage('login-page');
-                        break;
-                    case '2':
-                        e.preventDefault();
-                        showPage('profile-page');
-                        break;
-                    case '3':
-                        e.preventDefault();
-                        showPage('settings-page');
-                        break;
-                    case '4':
-                        e.preventDefault();
-                        showPage('badge-selection-page');
-                        break;
-                }
+        });
+        
+        // Fermeture du panneau d'achat en cliquant ailleurs
+        document.addEventListener('click', function(e) {
+            const panel = document.getElementById('purchase-panel');
+            if (panel && panel.classList.contains('show') && !panel.contains(e.target) && !e.target.closest('.club-option')) {
+                panel.classList.remove('show');
+                setTimeout(() => {
+                    panel.style.display = 'none';
+                }, 300);
+                
+                // Désélectionner le club
+                document.querySelectorAll('.club-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                selectedBadge = null;
             }
         });
     </script>
