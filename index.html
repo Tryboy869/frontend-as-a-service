@@ -1628,7 +1628,7 @@
             }
         };
         
-        // Fonction pour détecter et définir la langue
+        // Fonction pour détecter et définir la langue (version simple et sécurisée)
         function setLanguage() {
             const browserLang = navigator.language || navigator.userLanguage;
             
@@ -1637,46 +1637,23 @@
             } else if (browserLang.startsWith('es')) {
                 currentLanguage = 'es';
             } else {
-                currentLanguage = 'fr'; // Par défaut
+                currentLanguage = 'fr';
             }
             
-            updateTexts();
+            // Traduction simple des placeholders seulement pour éviter les conflits
+            updatePlaceholders();
         }
         
-        // Fonction pour mettre à jour tous les textes
-        function updateTexts() {
+        // Fonction sécurisée pour les placeholders seulement
+        function updatePlaceholders() {
             const t = translations[currentLanguage];
             
-            // Fonction helper pour mettre à jour le texte d'un élément
-            function updateText(id, key) {
-                const element = document.getElementById(id) || document.querySelector(`[data-text="${id}"]`);
-                if (element && t[key]) {
-                    element.textContent = t[key];
-                }
-            }
-            
-            // Fonction pour mettre à jour les placeholders
-            function updatePlaceholder(id, key) {
-                const element = document.getElementById(id);
-                if (element && t[key]) {
-                    element.placeholder = t[key];
-                }
-            }
-            
-            // Mise à jour des textes (sera appelée après le DOM ready)
             setTimeout(() => {
-                // Login page
-                updatePlaceholder('firstName', 'firstName');
-                updatePlaceholder('lastName', 'lastName');
+                const firstNameInput = document.getElementById('firstName');
+                const lastNameInput = document.getElementById('lastName');
                 
-                // Mettre à jour via les attributs data-text pour éviter les conflits
-                const elementsToUpdate = document.querySelectorAll('[data-translate]');
-                elementsToUpdate.forEach(element => {
-                    const key = element.getAttribute('data-translate');
-                    if (t[key]) {
-                        element.textContent = t[key];
-                    }
-                });
+                if (firstNameInput && t.firstName) firstNameInput.placeholder = t.firstName;
+                if (lastNameInput && t.lastName) lastNameInput.placeholder = t.lastName;
             }, 100);
         }
         
